@@ -30,6 +30,7 @@ export async function POST(request: Request) {
         session.timeStamp = Date.now()
         session.aesKey = undefined
         session.currentVault = undefined
+        session.remember = remembered
         await session.save()
         return new NextResponse(null, { status: 200 })
     } catch {

@@ -5,6 +5,7 @@ export interface SessionData {
     timeStamp: number,
     aesKey: Uint8Array | undefined,
     currentVault: string | undefined,
+    remember: boolean
 }
 
 
