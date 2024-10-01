@@ -24,6 +24,12 @@
     --input-outline: #191919;
     --input-color: gray;
     --input-padding: 7px;
+
+    --button-background: #121212;
+    --button-border: #161616;
+    --button-hover-background: #1D1D1D;
+    --button-color: gray;
+    --button-padding: 7px;
   }
 }
 
@@ -82,6 +88,18 @@ input {
 
 input:focus {
   outline: 1px solid var(--input-outline);
+}
+
+button {
+  padding: var(--button-padding);
+  background-color: var(--button-background);
+  border: 1px solid var(--button-border);
+  color: var(--button-color);
+  outline: none;
+}
+
+button:hover {
+  background-color: var(--button-hover-background);
 }
 
 @media (prefers-color-scheme: dark) {
