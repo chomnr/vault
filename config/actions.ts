@@ -29,17 +29,18 @@ export async function loginUser(prevState: any, formData: FormData) {
 
 
 export async function loginUser(prevState: { error: any }, formData: FormData) {
-    const username = formData.get('username') as string;
-    const password = formData.get('password') as string;
+    const username = formData.get('username') as string
+    const password = formData.get('password') as string
+    const remember = formData.get('remember') === 'on'
     const response = await fetch(HOST_URL + "/api/login", {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password, remember }),
     });
     if (!response.ok) {
-        const error = await response.json();
-        return { error: error["error"] };
+        const error = await response.json()
+        return { error: error["error"] }
     } else {
         const session = await getIronSession<SessionData>(cookies(), SESSION_OPTIONS)
         session.timeStamp = Date.now()
