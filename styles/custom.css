@@ -88,6 +88,7 @@ nav .link {
     --alert-info-border: #2196F3;
     padding: 7px;
     font-size: 0.8rem;
+    user-select: none;
 }
 
 .alert.danger {
