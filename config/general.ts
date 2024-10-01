@@ -27,3 +27,10 @@ export const PORT = process.env.PORT
 
 export const COOKIE_NAME = "session"
 export const COOKIE_MAX_AGE = 24 * 60 * 60
+
+/* =======================================
+   CONSTRAINT
+   ======================================= */
+
+export const USERNAME_MIN_LENGTH = 3
+export const USERNAME_MAX_LENGTH = 36
