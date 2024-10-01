@@ -51,3 +51,9 @@ nav .link {
 .login p {
     user-select: none;
 }
+
+.login form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
