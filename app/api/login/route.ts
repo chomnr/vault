@@ -1,5 +1,5 @@
 import { USERNAME_MAX_LENGTH, USERNAME_MIN_LENGTH } from "@/config/general"
-import { LOGIN_CRED_REQUIRED, LOGIN_BAD_USERNAME, LOGIN_CRED_INCORRECT } from "@/config/response"
+import { LOGIN_CRED_REQUIRED, LOGIN_BAD_USERNAME, LOGIN_CRED_INCORRECT, LOGIN_BAD_REMEMBER_PARSE } from "@/config/response"
 import { SessionData, SESSION_OPTIONS } from "@/config/session"
 import { err_route } from "@/config/shorthand"
 import { getIronSession } from "iron-session"
@@ -10,7 +10,8 @@ export async function POST(request: Request) {
     try {
         const data = await request.json()
         const env = process.env
-        const { username, password } = data
+        const { username, password, remember } = data
+        const remembered = typeof remember === 'boolean' ? remember : false
         if (!username || !password)
             return err_route(LOGIN_CRED_REQUIRED.status,
                 LOGIN_CRED_REQUIRED.msg,
