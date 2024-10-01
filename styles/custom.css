@@ -39,6 +39,7 @@ nav .link {
     padding: 5px;
     display: flex;
     flex-direction: column;
+    gap: 5px;
 }
 
 .login h1 {
@@ -50,7 +51,3 @@ nav .link {
 .login p {
     user-select: none;
 }
-
-/* =======================================
-   Login
-   ======================================= */
