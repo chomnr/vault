@@ -50,10 +50,23 @@ nav .link {
 
 .login p {
     user-select: none;
+    font-size: 0.8rem;
 }
 
 .login form {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    width: 257px;
+    margin-top: 7px;
+}
+
+.login .checkbox {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 0.7rem;
+    gap: 5px;
+    margin-top: 7px;
+    margin-bottom: 7px;
 }
