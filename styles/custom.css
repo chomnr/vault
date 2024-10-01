@@ -61,7 +61,7 @@ nav .link {
     margin-top: 7px;
 }
 
-.login .checkbox {
+.login .remember {
     display: flex;
     justify-content: flex-start;
     align-items: center;

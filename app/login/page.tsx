@@ -14,7 +14,7 @@ export default function Login() {
                     <form>
                         <Input type="username" placeholder="Username" />
                         <Input type="password" placeholder="Password" />
-                        <div className="checkbox">
+                        <div className="remember">
                             <Input type="checkbox" placeholder="Password" />
                             Remember me
                         </div>
