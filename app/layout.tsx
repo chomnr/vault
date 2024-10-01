@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "@/styles/globals.css";
 import { fontMono, fontSans } from "@/config/fonts";
+import { Navbar } from "@/components/navbar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,6 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${fontSans.variable} ${fontMono.variable}`}>
+        <Navbar/>
         {children}
       </body>
     </html>
