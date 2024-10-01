@@ -9,7 +9,6 @@ import { NextResponse } from "next/server"
 const COOKIE_AGE_OFFSET_1 = COOKIE_MAX_AGE * 1000
 const COOKIE_AGE_OFFSET_2 = 24 * COOKIE_MAX_AGE * 1000
 
-
 export async function GET() {
     const session = await getIronSession<SessionData>(cookies(), SESSION_OPTIONS)
     if (Object.keys(session).length === 0)
