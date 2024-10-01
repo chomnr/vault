@@ -14,6 +14,6 @@ export const SESSION_OPTIONS: SessionOptions = {
     cookieName: COOKIE_NAME,
     cookieOptions: {
         secure: NODE_ENV === "production",
-        maxAge: COOKIE_MAX_AGE(true) // we go off the timestamp not the maxage anyway.
+        maxAge: COOKIE_MAX_AGE(true)
     },
 };
