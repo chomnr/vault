@@ -7,7 +7,6 @@ export default function Login() {
     return (
         <div className={styles.page}>
             <main className={styles.main}>
-
                 <div className="login">
                     <h2>Sign In</h2>
                     <p>Login to access your vault(s)</p>
