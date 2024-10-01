@@ -14,8 +14,16 @@
     --nav-initial-gap: 17px;
     --nav-item-gap: 11px;
 
-    --login-background: transparent;
+    --login-background: #fff;
     --login-border: #121212;
+    --login-color: #121212;
+
+
+    --input-background: #121212;
+    --input-border: #161616;
+    --input-outline: #191919;
+    --input-color: gray;
+    --input-padding: 7px;
   }
 }
 
@@ -62,6 +70,18 @@ nav {
 
 nav a {
   font-family: var(--font-sans);
+}
+
+input {
+  padding: var(--input-padding);
+  background-color: var(--input-background);
+  border: 1px solid var(--input-border);
+  color: var(--input-color);
+  outline: none;
+}
+
+input:focus {
+  outline: 1px solid var(--input-outline);
 }
 
 @media (prefers-color-scheme: dark) {

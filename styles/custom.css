@@ -36,14 +36,21 @@ nav .link {
    Login
    ======================================= */
 .login {
-    background-color: var(--login-background);
-    font-weight: 600;
+    padding: 5px;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .login h1 {
     user-select: none;
-    font-size: 4rem;
+    font-size: 2rem;
+    user-select: none;
 }
+
+.login p {
+    user-select: none;
+}
+
+/* =======================================
+   Login
+   ======================================= */
