@@ -7,6 +7,12 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
+    --nav-background: #0a0a0a;
+    --nav-border: #080808;
+    --nav-offset: 31px;
+    --nav-initial-gap: 17px;
+    --nav-item-gap: 11px;
   }
 }
 
@@ -33,6 +39,22 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+nav {
+  padding: var(--nav-offset);
+  background-color: var(--nav-background);
+  border-left: 1px solid var(--nav-border);
+  border-right: 1px solid var(--nav-border);
+  border-bottom: 1px solid var(--nav-border);
+  position: fixed;
+  display: flex;
+  align-items: center;
+  gap: var(--nav-item-gap);
+}
+
+nav a {
+  font-family: var(--font-sans);
 }
 
 @media (prefers-color-scheme: dark) {
