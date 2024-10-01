@@ -8,10 +8,9 @@ export default function Login() {
         <div className={styles.page}>
             <main className={styles.main}>
                 <div className="login">
-                    <h1>SIGN IN</h1>
-                    <p>Sign in to access your vault(s)</p>
                     <Input type="username" placeholder="Username"/>
                     <Input type="password" placeholder="Password"/>
+                    <button>Login</button>
                 </div>
             </main>
         </div>

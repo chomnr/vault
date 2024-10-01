@@ -11,6 +11,8 @@
   align-items: center;
   justify-content: center;
   flex: 1 1 auto;
+
+  transition: padding 0.3s ease;
   /*
   display: grid;
   grid-template-rows: 20px 1fr 20px;
