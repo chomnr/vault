@@ -12,7 +12,7 @@ interface ResponseError {
 
 export const LOGIN_REQUIRED: ResponseError = {
     status: 400,
-    msg: "A valid session is required to access this resource",
+    msg: "A valid login session is required to access this resource",
     code: "ERR_MISSING_LOGIN_SESSION"
 }
 
