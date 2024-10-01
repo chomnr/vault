@@ -33,3 +33,9 @@ export const LOGIN_BAD_USERNAME: ResponseError = {
     msg: `The username must be between ${USERNAME_MIN_LENGTH} and ${USERNAME_MAX_LENGTH} characters long`,
     code: "CRED_BAD_USERNAME"
 }
+
+export const LOGIN_EXPIRED: ResponseError = {
+    status: 401,
+    msg: `The session has expired, please log in again`,
+    code: "ERR_LOGIN_SESSION_EXPIRED"
+}
