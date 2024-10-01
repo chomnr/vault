@@ -7,10 +7,13 @@ export default function Login() {
     return (
         <div className={styles.page}>
             <main className={styles.main}>
+
                 <div className="login">
-                    <Input type="username" placeholder="Username"/>
-                    <Input type="password" placeholder="Password"/>
-                    <button>Login</button>
+                    <form>
+                        <Input type="username" placeholder="Username" />
+                        <Input type="password" placeholder="Password" />
+                        <button>Login</button>
+                    </form>
                 </div>
             </main>
         </div>
