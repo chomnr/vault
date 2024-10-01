@@ -2,9 +2,10 @@
 
 import "@/styles/custom.css";
 import styles from "../page.module.css";
-import { Input } from "@/components/input";
 import { useFormState } from "react-dom";
 import { loginUser } from "@/config/actions";
+import { Input } from "@/components/input";
+import { Alert } from "@/components/alert";
 
 const initialState = {
     error: null,
@@ -20,7 +21,8 @@ export default function Login() {
                     <h2>Sign In</h2>
                     <p>Login to access your vault(s)</p>
                     <form action={formAction}>
-                        <p aria-live="polite">{state.error}</p>
+                        {state.error && <Alert type={"danger"} message={state.error}/>}
+                        <br/>
                         <Input type="text" name="username" placeholder="Username" required />
                         <Input type="password" name="password" placeholder="Password" required />
                         <div className="remember">

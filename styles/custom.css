@@ -58,7 +58,7 @@ nav .link {
     flex-direction: column;
     gap: 5px;
     width: 257px;
-    margin-top: 7px;
+    margin-top: 5px;
 }
 
 .login .remember {
@@ -69,4 +69,49 @@ nav .link {
     gap: 5px;
     margin-top: 7px;
     margin-bottom: 7px;
+}
+
+
+/* =======================================
+   ALERT
+   ======================================= */
+.alert {
+    --alert-danger-background: #B71C1C;
+    --alert-danger-border: #D32F2F;
+    --alert-success-background: #1B5E20;
+    --alert-success-border: #388E3C;
+    --alert-warning-background: #FF6F00;
+    --alert-warning-border: #FFA000;
+    --alert-secondary-background: #6A1B9A;
+    --alert-secondary-border: #8E24AA;
+    --alert-info-background: #1976D2;
+    --alert-info-border: #2196F3;
+    padding: 7px;
+    font-size: 0.8rem;
+}
+
+.alert.danger {
+    background-color: var(--alert-danger-background);
+    border: 1px solid var(--alert-danger-border);
+}
+
+.alert.success {
+    /* Green */
+    background-color: var(--alert-success-background);
+    border: 1px solid var(--alert-success-border);
+}
+
+.alert.warning {
+    background-color: var(--alert-warning-background);
+    border: 1px solid var(--alert-warning-border);
+}
+
+.alert.info {
+    background-color: var(--alert-info-background);
+    border: 1px solid var(--alert-info-border);
+}
+
+.alert.secondary {
+    background-color: var(--alert-secondary-background);
+    border: 1px solid var(--alert-secondary-border);
 }
