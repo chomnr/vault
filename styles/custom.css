@@ -42,9 +42,9 @@ nav .link {
     gap: 5px;
 }
 
-.login h1 {
+.login h2 {
     user-select: none;
-    font-size: 2rem;
+    font-size: 1.6rem;
     user-select: none;
 }
 
