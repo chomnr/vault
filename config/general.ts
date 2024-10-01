@@ -26,7 +26,7 @@ export const PORT = process.env.PORT
    ======================================= */
 
 export const COOKIE_NAME = "session"
-export const COOKIE_MAX_AGE = 24 * 60 * 60
+export const COOKIE_MAX_AGE = (remember: boolean = false) => remember ? 24 * 24 * 60 * 60 : 24 * 60 * 60
 
 /* =======================================
    CONSTRAINT

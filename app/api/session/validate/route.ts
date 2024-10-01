@@ -6,20 +6,15 @@ import { getIronSession } from "iron-session"
 import { cookies } from "next/headers"
 import { NextResponse } from "next/server"
 
-const COOKIE_AGE_OFFSET_1 = COOKIE_MAX_AGE * 1000
-const COOKIE_AGE_OFFSET_2 = 24 * COOKIE_MAX_AGE * 1000
-
 export async function GET() {
     const session = await getIronSession<SessionData>(cookies(), SESSION_OPTIONS)
+    const COOKIE_AGE_OFFSET = COOKIE_MAX_AGE(session.remember) * 1000
     if (Object.keys(session).length === 0)
         return err_route(LOGIN_EXPIRED.status,
             LOGIN_EXPIRED.msg,
             LOGIN_EXPIRED.code)
-    if (!session.remember && Date.now() > (session.timeStamp + COOKIE_AGE_OFFSET_1))
-        return err_route(LOGIN_EXPIRED.status,
-            LOGIN_EXPIRED.msg,
-            LOGIN_EXPIRED.code)
-    if (session.remember && Date.now() > (session.timeStamp + COOKIE_AGE_OFFSET_2))
+    if (Date.now() > (session.timeStamp + COOKIE_AGE_OFFSET))
+        session.destroy()
         return err_route(LOGIN_EXPIRED.status,
             LOGIN_EXPIRED.msg,
             LOGIN_EXPIRED.code)
