@@ -5,7 +5,9 @@ export default function Login() {
     return (
         <div className={styles.page}>
             <main className={styles.main}>
-                asddsasd
+                <div className="login">
+                    <h1>V</h1>
+                </div>
             </main>
         </div>
     )

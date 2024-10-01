@@ -13,6 +13,9 @@
     --nav-offset: 31px;
     --nav-initial-gap: 17px;
     --nav-item-gap: 11px;
+
+    --login-background: transparent;
+    --login-border: #121212;
   }
 }
 
@@ -32,6 +35,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   display: flex;
   flex-direction: column;
+  font-family: var(--font-sans);
 }
 
 * {
