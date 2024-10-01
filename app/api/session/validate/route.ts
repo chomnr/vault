@@ -13,10 +13,11 @@ export async function GET() {
         return err_route(LOGIN_EXPIRED.status,
             LOGIN_EXPIRED.msg,
             LOGIN_EXPIRED.code)
-    if (Date.now() > (session.timeStamp + COOKIE_AGE_OFFSET))
+    if (Date.now() > (session.timeStamp + COOKIE_AGE_OFFSET)) {
         session.destroy()
         return err_route(LOGIN_EXPIRED.status,
             LOGIN_EXPIRED.msg,
             LOGIN_EXPIRED.code)
+    }
     return new NextResponse(null, { status: 200 })
 }
