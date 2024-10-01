@@ -1,5 +1,5 @@
 import { USERNAME_MAX_LENGTH, USERNAME_MIN_LENGTH } from "@/config/general"
-import { LOGIN_CRED_REQUIRED, LOGIN_BAD_USERNAME, LOGIN_CRED_INCORRECT, LOGIN_BAD_REMEMBER_PARSE } from "@/config/response"
+import { LOGIN_CRED_REQUIRED, LOGIN_BAD_USERNAME, LOGIN_CRED_INCORRECT } from "@/config/response"
 import { SessionData, SESSION_OPTIONS } from "@/config/session"
 import { err_route } from "@/config/shorthand"
 import { getIronSession } from "iron-session"
