@@ -26,14 +26,6 @@ export async function POST(request: Request) {
             return err_route(LOGIN_CRED_INCORRECT.status,
                 LOGIN_CRED_INCORRECT.msg,
                 LOGIN_CRED_INCORRECT.code)
-        /*
-        const session = await getIronSession<SessionData>(cookies(), SESSION_OPTIONS)
-        session.timeStamp = Date.now()
-        session.aesKey = undefined
-        session.currentVault = undefined
-        session.remember = remembered
-        await session.save()
-        */
         return new NextResponse(null, { status: 200 })
     } catch {
         return err_route(LOGIN_CRED_REQUIRED.status,
