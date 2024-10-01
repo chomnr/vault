@@ -10,13 +10,13 @@ interface ResponseError {
    LOGIN ERROR
    ======================================= */
 
-export const LOGIN_REQUIRED: ResponseError = {
+export const LOGIN_CRED_REQUIRED: ResponseError = {
     status: 400,
     msg: "Username and password are required",
     code: "ERR_MISSING_CREDENTIALS"
 }
 
-export const LOGIN_INCORRECT: ResponseError = {
+export const LOGIN_CRED_INCORRECT: ResponseError = {
     status: 401,
     msg: "The account either does not exist or the password is incorrect",
     code: "ERR_INCORRECT_CREDENTIALS"
