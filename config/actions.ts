@@ -6,11 +6,6 @@ import { newSession, SESSION_OPTIONS, SessionData } from './session';
 import { getIronSession } from 'iron-session';
 import { cookies } from 'next/headers';
 
-export async function getSession() {
-    //const session = await getIronSession<SessionData>(cookies(), SESSION_OPTIONS)
-    
-}
-
 export async function login(prevState: { result: { error: any; code: any; timestamp: any; } }, form: FormData) {
     const { username, password, remember } = {
         username: form.get('username') as string,
@@ -34,6 +29,5 @@ export async function login(prevState: { result: { error: any; code: any; timest
         }
     }
     await newSession(new Uint8Array(), "", remember)
-    redirect("/")
-    return { result: { error: null, code: null, timestamp: null } }
+    return redirect("/")
 }
