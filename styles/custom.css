@@ -183,6 +183,9 @@ nav .link {
 .vaults .vault .name {
     font-size: 0.8rem;
     user-select: none;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 @media (max-width: 600px) {
