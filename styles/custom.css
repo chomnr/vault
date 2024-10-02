@@ -211,6 +211,7 @@ nav .link {
     font-size: 0.8rem;
     display: flex;
     justify-content: center;
+    user-select: none;
 }
 
 .vault-manage .inner {
