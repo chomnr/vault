@@ -2,36 +2,14 @@
 
 import { redirect } from 'next/navigation'
 import { HOST_URL } from './general'
-import { cookies } from 'next/headers';
-import { getIronSession } from 'iron-session';
-import { SESSION_OPTIONS, SessionData } from './session';
+import { newSession, SESSION_OPTIONS, SessionData } from './session';
 
-/*
-export async function loginUser(prevState: any, formData: FormData) {
-    const username = formData.get('username')
-    const password = formData.get('password')
-    return fetch(HOST_URL + "/api/login", {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-    }).then(async response => {
-        if (!response.ok) {
-            const error = await response.json()
-            return { error: error["error"] }
-        } else {
-            return redirect("/")
-        }
-    }).catch(() => {
-        return { error: 'Something went wrong on our side' }
-    });
-}
-*/
-
-
-export async function loginUser(prevState: { error: any }, formData: FormData) {
-    const username = formData.get('username') as string
-    const password = formData.get('password') as string
-    const remember = formData.get('remember') === 'on'
+export async function login(prevState: { result: { error: any; code: any; timestamp: any; } }, form: FormData) {
+    const { username, password, remember } = {
+        username: form.get('username') as string,
+        password: form.get('password') as string,
+        remember: form.get('remember') === 'on'
+    };
     const response = await fetch(HOST_URL + "/api/login", {
         method: 'POST',
         credentials: 'include',
@@ -39,15 +17,16 @@ export async function loginUser(prevState: { error: any }, formData: FormData) {
         body: JSON.stringify({ username, password, remember }),
     });
     if (!response.ok) {
-        const error = await response.json()
-        return { error: error["error"] }
-    } else {
-        const session = await getIronSession<SessionData>(cookies(), SESSION_OPTIONS)
-        session.timeStamp = Date.now()
-        session.aesKey = undefined
-        session.currentVault = undefined
-        session.remember = true
-        await session.save()
+        const result = await response.json();
+        return {
+            result: {
+                error: result.error,
+                code: result.code,
+                timestamp: result.timestamp || new Date().toISOString(),
+            }
+        };
     }
-    return { error: null };
+    await newSession(new Uint8Array(), "", remember);
+    redirect("/")
+    return { result: { error: null, code: null, timestamp: null } };
 }
