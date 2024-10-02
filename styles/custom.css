@@ -3,6 +3,8 @@
    ======================================= */
 @media (max-width: 600px) {
     nav {
+        left: 0;
+        right: 0;
         justify-content: center;
     }
 }
@@ -134,4 +136,43 @@ nav .link {
     padding: 15px;
     font-size: 0.7rem;
     cursor: pointer;
+}
+
+/* =======================================
+   VAULT
+   ======================================= */
+.vaults {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 600px;
+    height: 80px;
+    gap: 5px;
+}
+
+.vaults .vault {
+    background-color: var(--vault-individual-background);
+    border: 1px solid var(--vault-individual-border);
+    transition: width 0.3s ease;
+    transition: height 0.3s ease;
+    height: 120px;
+    width: 120px;
+    font-size: 0,8rem;
+    user-select: none;
+}
+
+.vaults .vault.nobackground {
+    background-color: transparent;
+    border: 0;
+}
+
+@media (max-width: 600px) {
+    .vaults {
+        max-width: 400px;
+        height: 80px;
+    }
+
+    .vaults .vault {
+        height: 80px;
+        width: 80px;
+    }
 }

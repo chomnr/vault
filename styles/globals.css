@@ -30,6 +30,9 @@
     --button-hover-background: #1D1D1D;
     --button-color: gray;
     --button-padding: 7px;
+
+    --vault-individual-background: #0B0B0B;
+    --vault-individual-border: #121212;
   }
 }
 
@@ -64,6 +67,7 @@ a {
 }
 
 nav {
+  position: absolute;
   padding: var(--nav-offset);
   background-color: var(--nav-background);
   border-left: 1px solid var(--nav-border);
