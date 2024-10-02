@@ -11,6 +11,5 @@ export async function POST() {
         return err_route(LOGIN_REQUIRED.status,
             LOGIN_REQUIRED.msg,
             LOGIN_REQUIRED.code)
-    session.destroy()
     return new NextResponse(null, { status: 200 })
 }
