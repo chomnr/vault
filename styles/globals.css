@@ -36,6 +36,11 @@
     --vault-individual-color: gray;
     --vault-individual-hover-border: lightgray;
     --vault-individual-hover-color: lightgray;
+
+    --vault-manage-color: gray;
+    --vault-manage-border: gray;
+    --vault-manage-hover-color: lightgray;
+    --vault-manage-hover-border: lightgray;
   }
 }
 

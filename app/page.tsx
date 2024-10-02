@@ -44,6 +44,9 @@ export default function Home() {
             <div className="name">VAULT THREE</div>
           </div>
         </div>
+        <div className="vault-manage">
+          <div className="inner">Manage Vaults</div>
+        </div>
       </main>
     </div>
   );

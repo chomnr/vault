@@ -211,3 +211,33 @@ nav .link {
         width: 80px;
     }
 }
+
+/* =======================================
+   VAULT MANAGE
+   ======================================= */
+.vault-manage {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 300px;
+    text-align: center;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.vault-manage .inner {
+    width: fit-content;
+    padding: 5px;
+    color: var(--vault-manage-color);
+    border: 1px solid var(--vault-manage-border);
+}
+
+
+.vault-manage .inner:hover {
+    width: fit-content;
+    padding: 5px;
+    color: var(--vault-manage-hover-color);
+    border: 1px solid var(--vault-manage-hover-border);
+    cursor: pointer;
+}
