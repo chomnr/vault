@@ -25,23 +25,27 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <div className="vault header">VAULT(s)</div>
+        <div className="vault header">{/* HEADER HERE */}</div>
         <div ref={vaultsRef} className="vaults">
+          {/*
           <div className="vault">
             <div className="inner">
               <div className="icon">1</div>
             </div>
             <div className="name">VAULT ONE</div>
           </div>
+          */}
           <div className="vault">
             <div className="inner">
               <div className="icon">+</div>
             </div>
           </div>
         </div>
+        {/*
         <div className="vault-manage">
           <div className="inner">Manage Vaults</div>
         </div>
+        */}
       </main>
     </div>
   );
