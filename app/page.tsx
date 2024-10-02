@@ -1,5 +1,4 @@
 import styles from "./page.module.css";
-import { FloatingLogout } from "@/components/logout";
 
 export default function Home() {
   return (
