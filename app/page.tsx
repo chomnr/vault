@@ -25,6 +25,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+        <div className="vault header">VAULT(s)</div>
         <div ref={vaultsRef} className="vaults">
           <div className="vault">
             <div className="inner">
