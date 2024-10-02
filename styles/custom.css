@@ -89,6 +89,13 @@ nav .link {
     padding: 7px;
     font-size: 0.8rem;
     user-select: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.alert .code {
+    font-weight: bold;
+    font-size: 0.7rem;
 }
 
 .alert.danger {
