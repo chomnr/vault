@@ -33,6 +33,9 @@
 
     --vault-individual-background: #0B0B0B;
     --vault-individual-border: #121212;
+    --vault-individual-color: gray;
+    --vault-individual-hover-border: lightgray;
+    --vault-individual-hover-color: lightgray;
   }
 }
 

@@ -147,22 +147,52 @@ nav .link {
     max-width: 600px;
     height: 80px;
     gap: 5px;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-mono);
+    color: var(--vault-individual-color);
 }
 
 .vaults .vault {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+}
+
+.vaults .vault:hover {
+    color: var(--vault-individual-hover-color);
+    cursor: pointer;
+}
+
+.vaults .vault .inner {
     background-color: var(--vault-individual-background);
     border: 1px solid var(--vault-individual-border);
     transition: width 0.3s ease;
     transition: height 0.3s ease;
     height: 120px;
     width: 120px;
-    font-size: 0,8rem;
     user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.vaults .vault.nobackground {
-    background-color: transparent;
-    border: 0;
+.vaults .vault .inner div:first-child {
+    height: fit-content;
+    width: fit-content;
+    text-align: center;
+    font-size: 4rem;
+}
+
+.vaults .vault .name {
+    font-size: 0.7rem;
+    user-select: none;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 120px;
 }
 
 @media (max-width: 600px) {
@@ -171,8 +201,13 @@ nav .link {
         height: 80px;
     }
 
-    .vaults .vault {
+    .vaults .vault .inner {
         height: 80px;
+        width: 80px;
+    }
+
+    .vaults .vault .name {
+        font-size: 0.5rem;
         width: 80px;
     }
 }
