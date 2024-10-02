@@ -1,9 +1,20 @@
 'use server'
 
 import { redirect } from 'next/navigation'
-import { HOST_URL } from './general'
+import { COOKIE_MAX_AGE, HOST_URL } from './general'
 import { destroySession, newSession, SESSION_OPTIONS, SessionData } from './session';
+import { getIronSession } from 'iron-session';
+import { cookies } from 'next/headers';
 
+export async function isAuthenticated() {
+    const session = await getIronSession<SessionData>(cookies(), SESSION_OPTIONS)
+    const COOKIE_AGE_OFFSET = COOKIE_MAX_AGE(session?.remember) * 1000
+    if (!session || Object.keys(session).length === 0 || Date.now() > (session.timeStamp + COOKIE_AGE_OFFSET)) {
+        return false
+    } else {
+        return true
+    }
+}
 
 export async function login(prevState: { result: { error: any; code: any; timestamp: any; } }, form: FormData) {
     const { username, password, remember } = {
