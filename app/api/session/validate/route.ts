@@ -14,7 +14,7 @@ export async function GET() {
             LOGIN_EXPIRED.msg,
             LOGIN_EXPIRED.code)
     if (Date.now() > (session.timeStamp + COOKIE_AGE_OFFSET)) {
-        session.destroy()
+        //session.destroy()
         return err_route(LOGIN_EXPIRED.status,
             LOGIN_EXPIRED.msg,
             LOGIN_EXPIRED.code)
