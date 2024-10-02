@@ -2,7 +2,8 @@
 
 import { redirect } from 'next/navigation'
 import { HOST_URL } from './general'
-import { newSession, SESSION_OPTIONS, SessionData } from './session';
+import { destroySession, newSession, SESSION_OPTIONS, SessionData } from './session';
+
 
 export async function login(prevState: { result: { error: any; code: any; timestamp: any; } }, form: FormData) {
     const { username, password, remember } = {
@@ -28,4 +29,8 @@ export async function login(prevState: { result: { error: any; code: any; timest
     }
     await newSession(new Uint8Array(), "", remember)
     return redirect("/")
+}
+
+export async function logout() {
+    await destroySession()
 }
