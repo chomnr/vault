@@ -123,3 +123,15 @@ nav .link {
     background-color: var(--alert-secondary-background);
     border: 1px solid var(--alert-secondary-border);
 }
+
+/* =======================================
+   FLOATING LOGOUT
+   ======================================= */
+.floating-logout {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 15px;
+    font-size: 0.7rem;
+    cursor: pointer;
+}
