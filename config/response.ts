@@ -31,7 +31,7 @@ export const LOGIN_CRED_INCORRECT: ResponseError = {
 export const LOGIN_BAD_USERNAME: ResponseError = {
     status: 400,
     msg: `The username must be between ${USERNAME_MIN_LENGTH} and ${USERNAME_MAX_LENGTH} characters long`,
-    code: "CRED_BAD_USERNAME"
+    code: "ERR_CRED_BAD_USERNAME"
 }
 
 export const LOGIN_EXPIRED: ResponseError = {
