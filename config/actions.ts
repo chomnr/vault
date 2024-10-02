@@ -3,8 +3,6 @@
 import { redirect } from 'next/navigation'
 import { HOST_URL } from './general'
 import { newSession, SESSION_OPTIONS, SessionData } from './session';
-import { getIronSession } from 'iron-session';
-import { cookies } from 'next/headers';
 
 export async function login(prevState: { result: { error: any; code: any; timestamp: any; } }, form: FormData) {
     const { username, password, remember } = {
