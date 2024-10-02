@@ -26,7 +26,7 @@ export async function POST(request: Request) {
             return err_route(LOGIN_CRED_INCORRECT.status,
                 LOGIN_CRED_INCORRECT.msg,
                 LOGIN_CRED_INCORRECT.code)
-        return NextResponse.json({remember: remembered}, { status: 200 })
+        return new NextResponse(null, { status: 200 })
     } catch {
         return err_route(LOGIN_CRED_REQUIRED.status,
             LOGIN_CRED_REQUIRED.msg,
