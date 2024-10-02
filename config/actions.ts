@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation'
 import { COOKIE_MAX_AGE, HOST_URL } from './general'
-import { destroySession, newSession, SESSION_OPTIONS, SessionData } from './session';
+import { newSession, SESSION_OPTIONS, SessionData } from './session';
 import { getIronSession } from 'iron-session';
 import { cookies } from 'next/headers';
 
@@ -40,8 +40,4 @@ export async function login(prevState: { result: { error: any; code: any; timest
     }
     await newSession(new Uint8Array(), "", remember)
     return redirect("/")
-}
-
-export async function logout() {
-    await destroySession()
 }
