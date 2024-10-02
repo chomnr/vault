@@ -21,6 +21,7 @@ model Vault {
   credentials Credential[]
 }
 
+// keep the credentials inside of vault???
 model Credential {
   id          String   @id @default(uuid()) @map("_id")
   vaultId     String
