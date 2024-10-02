@@ -26,8 +26,3 @@ export const newSession = async (key: Uint8Array, vault: string, remember: boole
     session.remember = remember
     await session.save()
 }
-
-export const destroySession = async () => {
-    const session = await getIronSession<SessionData>(cookies(), SESSION_OPTIONS)
-    session.destroy()
-}
