@@ -1,8 +1,8 @@
+import { COOKIE_MAX_AGE } from '@/config/general';
+import { SESSION_OPTIONS, SessionData } from '@/config/session';
 import { getIronSession } from 'iron-session';
 import { NextResponse } from 'next/server';
 import { NextRequest } from 'next/server';
-import { SESSION_OPTIONS, SessionData } from './config/session';
-import { COOKIE_MAX_AGE } from './config/general';
 
 export async function middleware(request: NextRequest) {
     const result = NextResponse.next()
@@ -14,15 +14,25 @@ export async function middleware(request: NextRequest) {
             return NextResponse.redirect(new URL('/login', request.url))
         }
     } else {
-        if (request.nextUrl.pathname === '/login') {
+        if (request.nextUrl.pathname === '/login' || request.nextUrl.pathname === '/api/login') {
             return NextResponse.redirect(new URL('/', request.url))
         }
     }
+
+    console.log(request.nextUrl.pathname)
     return result
 }
 
 export const config = {
     matcher: [
+        '/((?!api/login|api|_next/static|_next/image|favicon.ico).*)'
+    ]
+}
+
+/*
+export const config = {
+    matcher: [
         '/((?!api|_next/static|_next/image|favicon.ico).*)'
     ]
 }
+    */
