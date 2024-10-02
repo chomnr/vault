@@ -158,16 +158,22 @@ nav .link {
     justify-content: center;
 }
 
+.vaults.col {
+    flex-direction: row;
+}
+
 .vaults .vault {
     width: 120px;
     height: 120px;
     text-align: center;
 }
 
+/*
 .vaults .vault:hover {
     color: var(--vault-individual-hover-color);
     cursor: pointer;
 }
+*/
 
 .vaults .vault .inner {
     height: inherit;
@@ -195,39 +201,29 @@ nav .link {
     overflow: hidden;
 }
 
+.vaults input {
+    height: 29px;
+}
+
+.vaults .vault-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    color: red;
+}
+
+.vaults .vault-settings .upload {
+    flex: 1 1 auto;
+    background-color: var(--vault-upload-background);
+}
+
+
 @media (max-width: 600px) {
     .vaults {
         gap: 31px;
     }
 }
 
-
-/* =======================================
-   VAULT MANAGE
-   ======================================= */
-.vault-manage {
-    margin-top: 31px;
-    text-align: center;
-    font-size: 0.8rem;
-    display: flex;
-    justify-content: center;
-    user-select: none;
-}
-
-.vault-manage .inner {
-    width: fit-content;
-    padding: 7px;
-    color: var(--vault-manage-color);
-    border: 1px solid var(--vault-manage-border);
-}
-
-
-.vault-manage .inner:hover {
-    width: fit-content;
-    color: var(--vault-manage-hover-color);
-    border: 1px solid var(--vault-manage-hover-border);
-    cursor: pointer;
-}
 
 /* =======================================
    VAULT
@@ -299,5 +295,29 @@ nav .link {
         font-size: 0.5rem;
         width: 80px;
     }
+}
+
+   .vault-manage {
+    margin-top: 31px;
+    text-align: center;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: center;
+    user-select: none;
+}
+
+.vault-manage .inner {
+    width: fit-content;
+    padding: 7px;
+    color: var(--vault-manage-color);
+    border: 1px solid var(--vault-manage-border);
+}
+
+
+.vault-manage .inner:hover {
+    width: fit-content;
+    color: var(--vault-manage-hover-color);
+    border: 1px solid var(--vault-manage-hover-border);
+    cursor: pointer;
 }
 */

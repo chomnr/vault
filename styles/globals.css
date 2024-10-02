@@ -18,7 +18,6 @@
     --login-border: #121212;
     --login-color: #121212;
 
-
     --input-background: #121212;
     --input-border: #161616;
     --input-outline: #191919;
@@ -41,6 +40,8 @@
     --vault-manage-border: gray;
     --vault-manage-hover-color: lightgray;
     --vault-manage-hover-border: lightgray;
+
+    --vault-upload-background: #191919;
   }
 }
 
