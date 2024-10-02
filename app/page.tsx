@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 
 export default function Home() {
   const vaultsRef = useRef<HTMLDivElement>(null)
+  /*
   useEffect(() => {
     if (vaultsRef.current) {
       const vaults = vaultsRef.current;
@@ -20,7 +21,7 @@ export default function Home() {
       }
     }
   }, []);
-
+*/
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -43,9 +44,12 @@ export default function Home() {
             </div>
             <div className="name">VAULT THREE</div>
           </div>
-        </div>
-        <div className="vault-manage">
-          <div className="inner">Manage Vaults</div>
+          <div className="vault">
+            <div className="inner">
+              <div className="icon">4</div>
+            </div>
+            <div className="name">VAULT FOUR</div>
+          </div>
         </div>
       </main>
     </div>

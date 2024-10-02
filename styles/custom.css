@@ -138,14 +138,65 @@ nav .link {
     cursor: pointer;
 }
 
+
 /* =======================================
    VAULT
    ======================================= */
 .vaults {
     display: flex;
     flex-wrap: wrap;
-    max-width: 600px;
-    height: 80px;
+    font-family: var(--font-mono);
+    color: var(--vault-individual-color);
+    gap: 17px;
+    justify-content: center;
+}
+
+.vaults .vault {
+    width: 120px;
+    height: 120px;
+    text-align: center;
+}
+
+.vaults .vault:hover {
+    color: var(--vault-individual-hover-color);
+    cursor: pointer;
+}
+
+.vaults .vault .inner {
+    height: inherit;
+    width: inherit;
+    background-color: var(--vault-individual-background);
+    border: 1px solid var(--vault-individual-border);
+    transition: width 0.3s ease;
+    transition: height 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    user-select: none;
+}
+
+.vaults .vault .inner .icon {
+    font-size: 4.5rem;
+}
+
+.vaults .vault .name {
+    font-size: 0.8rem;
+    user-select: none;
+}
+
+@media (max-width: 600px) {
+    .vaults {
+        gap: 31px;
+    }
+}
+
+/* =======================================
+   VAULT
+   ======================================= 
+.vaults {
+    display: flex;
+    flex-wrap: wrap;
     gap: 17px;
     justify-content: center;
     align-items: center;
@@ -211,10 +262,11 @@ nav .link {
         width: 80px;
     }
 }
+*/
 
 /* =======================================
    VAULT MANAGE
-   ======================================= */
+   ======================================= 
 .vault-manage {
     position: absolute;
     left: 0;
@@ -241,3 +293,4 @@ nav .link {
     border: 1px solid var(--vault-manage-hover-border);
     cursor: pointer;
 }
+*/
