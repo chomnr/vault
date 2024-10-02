@@ -9,7 +9,6 @@ export interface SessionData {
     remember: boolean
 }
 
-
 export const SESSION_OPTIONS: SessionOptions = {
     password: COOKIE_SECRET,
     cookieName: COOKIE_NAME,
@@ -30,5 +29,5 @@ export const newSession = async (key: Uint8Array, vault: string, remember: boole
 
 export const destroySession = async () => {
     const session = await getIronSession<SessionData>(cookies(), SESSION_OPTIONS)
-    await session.destroy()
+    session.destroy()
 }
