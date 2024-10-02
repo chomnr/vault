@@ -4,7 +4,9 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        vaults go here...
+        <div className="vaults">
+          dsdsdsadsdasds
+        </div>
       </main>
     </div>
   );
