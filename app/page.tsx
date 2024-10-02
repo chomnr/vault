@@ -31,6 +31,18 @@ export default function Home() {
             </div>
             <div className="name">VAULT ONE</div>
           </div>
+          <div className="vault">
+            <div className="inner">
+              <div className="icon">2</div>
+            </div>
+            <div className="name">VAULT TWO</div>
+          </div>
+          <div className="vault">
+            <div className="inner">
+              <div className="icon">3</div>
+            </div>
+            <div className="name">VAULT THREE</div>
+          </div>
         </div>
       </main>
     </div>
