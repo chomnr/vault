@@ -17,7 +17,6 @@ const initialState = {
 
 export default function Login() {
     const [state, formAction] = useFormState(login, initialState);
-    
     return (
         <div className={styles.page}>
             <main className={styles.main}>
@@ -42,8 +41,6 @@ export default function Login() {
         </div>
     );
 }
-
-
 
 /*
 import "@/styles/custom.css";
