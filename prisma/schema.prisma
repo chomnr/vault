@@ -17,7 +17,6 @@ datasource db {
 model Vault {
   id        String     @id @default(uuid()) @map("_id")
   name      String
-  userId    String
   credentials Credential[]
 }
 

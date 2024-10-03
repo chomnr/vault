@@ -221,9 +221,13 @@ form.key-upload {
     border: 1px solid #191919;
     display: inline-block;
     padding: 6px 12px;
+    height: 45px;
     cursor: pointer;
-    font-size: 0.7rem;
+    font-size: 1rem;
     user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .custom-file-upload:hover {
@@ -232,7 +236,7 @@ form.key-upload {
 }
 
 form.key-upload .submit {
-    height: 28px;
+    height: 33px;
     width: 125px;
     background-color: #4B4B4B;
     border: 1px solid #7D7D7D;
@@ -240,11 +244,11 @@ form.key-upload .submit {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
 }
 
 form.key-upload .submit:hover {
-    height: 28px;
+    height: 33px;
     background-color: #7D7D7D;
     border: 1px solid #4B4B4B;
 }

@@ -35,14 +35,16 @@ export default function Home() {
   }, [isShowVaultProceed]);
 
   const [fileName, setFileName] = useState<string | null>(null);
-  const keyUploadRef = useRef<HTMLInputElement>(null)
+  const keyUploadRef = useRef<HTMLInputElement>(null);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null;
     setFileName(file ? file.name : null);
-    if (keyUploadRef.current) {
-      keyUploadRef.current.disabled = true
-    }
   };
+  useEffect(() => {
+    if (keyUploadRef.current) {
+      keyUploadRef.current.disabled = !!fileName;
+    }
+  }, [fileName]);
   return (
     <div className={styles.page}>
       <main className={styles.main}>
