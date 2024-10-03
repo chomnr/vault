@@ -26,7 +26,7 @@ export default function Test() {
 */
   return (
     <div className={styles.page}>
-      <main className={styles.main} style={{gap: '5px'}}>
+      <main className={styles.main}>
         {/*
       <Alert type="danger" code="ERR_BAD_KEY" message="Key you entered is not good." />
         */}
@@ -37,7 +37,7 @@ export default function Test() {
             </div>
           </div>
           <form className="vault-settings">
-            <input type="file" className="upload" />
+            <input type="file" className="upload"/>
             <button type="submit">Enter</button>
           </form>
         </div>
