@@ -6,7 +6,7 @@ import { Input } from "@/components/input";
 
 export default function Home() {
   const vaultsRef = useRef<HTMLDivElement>(null)
-  const [isShowVaultProceed, setShowVaultProceed] = useState(false)
+  const [vaultKeyUpload, setVaultKeyUploadUi] = useState(false)
   useEffect(() => {
     const vaults = vaultsRef.current;
     if (vaults) {
@@ -32,7 +32,7 @@ export default function Home() {
         };
       });
     }
-  }, [isShowVaultProceed]);
+  }, [vaultKeyUpload]);
 
   const [fileName, setFileName] = useState<string | null>(null);
   const keyUploadRef = useRef<HTMLInputElement>(null);
@@ -48,9 +48,9 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        {!isShowVaultProceed ? (
+        {!vaultKeyUpload ? (
           <><div className="vault header">{/* HEADER HERE */}</div><div ref={vaultsRef} className="vaults">
-            <div id="1" className="vault" onClick={() => setShowVaultProceed(true)}>
+            <div id="1" className="vault" onClick={() => setVaultKeyUploadUi(true)}>
               <div className="inner">
                 <div className="icon">1</div>
               </div>
