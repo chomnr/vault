@@ -201,30 +201,53 @@ nav .link {
     overflow: hidden;
 }
 
-.vaults input {
-    height: 29px;
-}
-
-.vaults .vault-settings {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    color: red;
-}
-
-.vaults .vault-settings .upload {
-    flex: 1 1 auto;
-    background-color: var(--vault-upload-background);
-}
-
-
 @media (max-width: 600px) {
     .vaults {
         gap: 31px;
     }
 }
 
+/* =======================================
+   File Upload
+   ======================================= */
+form.key-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
 
+.custom-file-upload {
+    border: 1px solid #191919;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 0.7rem;
+    user-select: none;
+}
+
+.custom-file-upload:hover {
+    border: 1px solid gray;
+    color: lightgray;
+}
+
+form.key-upload .submit {
+    height: 28px;
+    width: 125px;
+    background-color: #4B4B4B;
+    border: 1px solid #7D7D7D;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+}
+
+form.key-upload .submit:hover {
+    height: 28px;
+    background-color: #7D7D7D;
+    border: 1px solid #4B4B4B;
+}
 /* =======================================
    VAULT
    ======================================= 

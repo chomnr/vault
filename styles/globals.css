@@ -103,6 +103,11 @@ input:focus {
   outline: 1px solid var(--input-outline);
 }
 
+input[type="file"] {
+  display: none;
+}
+
+
 button {
   padding: var(--button-padding);
   background-color: var(--button-background);
