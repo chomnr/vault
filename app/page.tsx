@@ -33,22 +33,26 @@ export default function Home() {
       });
     }
   }, [isShowVaultProceed]);
+
+  const [fileName, setFileName] = useState<string | null>(null);
+  const keyUploadRef = useRef<HTMLInputElement>(null)
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
+    setFileName(file ? file.name : null);
+    if (keyUploadRef.current) {
+      keyUploadRef.current.disabled = true
+    }
+  };
   return (
     <div className={styles.page}>
       <main className={styles.main}>
         {!isShowVaultProceed ? (
-        <><div className="vault header">{/* HEADER HERE */}</div><div ref={vaultsRef} className="vaults">
+          <><div className="vault header">{/* HEADER HERE */}</div><div ref={vaultsRef} className="vaults">
             <div id="1" className="vault" onClick={() => setShowVaultProceed(true)}>
               <div className="inner">
                 <div className="icon">1</div>
               </div>
               <div className="name">VAULT ONE</div>
-            </div>
-            <div id="2" className="vault">
-              <div className="inner">
-                <div className="icon">2</div>
-              </div>
-              <div className="name">VAULT TWO</div>
             </div>
             <div id="vault_add" className="vault">
               <div className="inner">
@@ -57,6 +61,30 @@ export default function Home() {
             </div>
           </div></>
         ) : (
+          <form className="key-upload">
+            {/*
+          <Alert type={"danger"} code="ERR_BAD_KEY" message="The key you uploaded does not belong to the corresponding vault" />
+          <Alert type={"success"} code="Success" message="The key has successfully decrypted the contents you may proceed" />
+          */}
+            {/*
+          <Alert type={"danger"} code="ERR_BAD_KEY" message="The key you uploaded does not belong to the corresponding vault" />
+          <Alert type={"success"} code="Success" message="The key has successfully decrypted the contents you may proceed" />
+          */}
+            <label htmlFor="key-upload" className="custom-file-upload">
+              {fileName ? fileName : 'Upload AES 256 Key'}
+            </label>
+            <Input id="key-upload" ref={keyUploadRef} name="key-upload" type={"file"} onchange={handleFileChange} />
+            {fileName ? <button className="submit">
+            Decrypt Vault
+          </button> : null}
+          </form>
+        )}
+      </main>
+    </div>
+  );
+}
+
+{/*
           <div className="vaults">
             <div className="vault">
               <div className="inner">
@@ -69,8 +97,4 @@ export default function Home() {
               <button type="submit" onClick={() => setShowVaultProceed(false)}>Back</button>
             </form>
           </div>
-        )}
-      </main>
-    </div>
-  );
-}
+          */}
