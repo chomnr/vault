@@ -4,43 +4,36 @@ import { useEffect, useRef, useState } from "react";
 import styles from "../page.module.css";
 import { Input } from "@/components/input";
 import { Alert } from "@/components/alert";
+import { CheckMark } from "@/components/icons";
 
 
 export default function Test() {
-  /*  
-  useEffect(() => {
-    if (vaultsRef.current) {
-      const vaults = vaultsRef.current;
-      const children = vaults.children;
-      for (let i = 0; i < children.length; i++) {
-        const vault = children[i] as HTMLDivElement;
-        vault.addEventListener('mouseover', (e) => {
-          (vault.children[0] as HTMLDivElement).style.borderColor = 'var(--vault-individual-hover-border)';
-        })
-        vault.addEventListener('mouseout', (e) => {
-          (vault.children[0] as HTMLDivElement).style.borderColor = 'var(--vault-individual-border)';
-        })
-      }
+  const [fileName, setFileName] = useState<string | null>(null);
+  const keyUploadRef = useRef<HTMLInputElement>(null)
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
+    setFileName(file ? file.name : null);
+    if (keyUploadRef.current) {
+      keyUploadRef.current.disabled = true
     }
-  }, []);
-*/
+  };
+  // show error if key is incorrect show proceed button if it's successful
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        {/*
-      <Alert type="danger" code="ERR_BAD_KEY" message="Key you entered is not good." />
-        */}
-        <div className="vaults">
-        <div className="vault">
-            <div className="inner">
-              <div className="icon">1</div>
-            </div>
-          </div>
-          <form className="vault-settings">
-            <input type="file" className="upload"/>
-            <button type="submit">Enter</button>
-          </form>
-        </div>
+        <form className="key-upload">
+          {/*
+          <Alert type={"danger"} code="ERR_BAD_KEY" message="The key you uploaded does not belong to the corresponding vault" />
+          <Alert type={"success"} code="Success" message="The key has successfully decrypted the contents you may proceed" />
+          */}
+          <label htmlFor="key-upload" className="custom-file-upload">
+            {fileName ? fileName : 'Upload AES 256 Key'}
+          </label>
+          <Input id="key-upload" ref={keyUploadRef} name="key-upload" type={"file"} onchange={handleFileChange} />
+          {fileName ? <button className="submit">
+            Decrypt Vault
+          </button> : null}
+        </form>
       </main>
     </div>
   );
