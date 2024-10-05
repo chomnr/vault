@@ -6,7 +6,25 @@ import { Input } from "@/components/input";
 import { Alert } from "@/components/alert";
 import { CheckMark } from "@/components/icons";
 
-
+export default function Test() {
+  return (
+    <div className={styles.page}>
+      <main className={styles.main}>
+        <div className="vault-creation">
+          <div className="vault-creation-title">Edit Vault</div>
+          <form>
+            <Input type={"text"} placeholder="Name" />
+            <div className="divider"></div>
+            <div className="button-group">
+              <button>Save</button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+  )
+}
+/*
 export default function Test() {
   const [fileName, setFileName] = useState<string | null>(null);
   const keyUploadRef = useRef<HTMLInputElement>(null)
@@ -22,10 +40,8 @@ export default function Test() {
     <div className={styles.page}>
       <main className={styles.main}>
         <form className="key-upload">
-          {/*
           <Alert type={"danger"} code="ERR_BAD_KEY" message="The key you uploaded does not belong to the corresponding vault" />
           <Alert type={"success"} code="Success" message="The key has successfully decrypted the contents you may proceed" />
-          */}
           <label htmlFor="key-upload" className="custom-file-upload">
             {fileName ? fileName : 'Upload AES 256 Key'}
           </label>
@@ -38,3 +54,4 @@ export default function Test() {
     </div>
   );
 }
+*/

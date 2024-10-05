@@ -75,7 +75,7 @@ nav .link {
 
 
 /* =======================================
-   ALERT
+   Alert
    ======================================= */
 .alert {
     --alert-danger-background: #B71C1C;
@@ -127,7 +127,7 @@ nav .link {
 }
 
 /* =======================================
-   FLOATING LOGOUT
+   Floating LOgout
    ======================================= */
 .floating-logout {
     position: absolute;
@@ -140,7 +140,7 @@ nav .link {
 
 
 /* =======================================
-   VAULT
+   Vault
    ======================================= */
 .vault.header {
     text-align: center;
@@ -252,6 +252,50 @@ form.key-upload .submit:hover {
     background-color: #7D7D7D;
     border: 1px solid #4B4B4B;
 }
+
+/* =======================================
+   Vault Creation
+   ======================================= 
+
+.vault-creation {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    max-width: 500px;
+    word-break: break-all;
+    gap: 11px;
+}
+
+.vault-creation-title {
+    width: 100%;
+    border-bottom: 1px solid #4B4B4B;
+    font-size: 3rem;
+}
+
+.vault-creation form {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.vault-creation form input {
+    width: 500px;
+    height: 43px;
+    font-size: 1.2rem;
+}
+
+.vault-creation form .button-group {
+    width: 500px;
+    height: 43px;
+    font-size: 1.2rem;
+}
+
+.vault-creation form .button-group button {
+    padding: 11px;
+    font-size: 1rem;
+}
+*/
+
 /* =======================================
    VAULT
    ======================================= 
