@@ -17,8 +17,10 @@ datasource db {
 model Vault {
   id        String     @id @default(uuid()) @map("_id")
   name      String
+  maxCredentials Int
   credentials Credential[]
 }
+
 
 // keep the credentials inside of vault???
 model Credential {
