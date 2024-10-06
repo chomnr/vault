@@ -33,4 +33,7 @@ export const COOKIE_MAX_AGE = (remember: boolean = false) => remember ? 24 * 24 
    ======================================= */
 
 export const USERNAME_MIN_LENGTH = 3
-export const USERNAME_MAX_LENGTH = 36
+export const USERNAME_MAX_LENGTH = 37
+
+export const VAULT_MIN_LENGTH = 3
+export const VAULT_MAX_LENGTH = 23
