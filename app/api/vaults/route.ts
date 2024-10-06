@@ -2,6 +2,7 @@ import { VAULT_NAME_MIN_LENGTH, VAULT_NAME_MAX_LENGTH, VAULT_CREDENTIAL_LIMIT } 
 import { VAULT_BAD_NAME, VAULT_CREDENTIALS_EXCEEDED, VAULT_MAX_CREDENTIALS_NOT_INTEGER } from "@/config/response";
 import { err_route } from "@/config/shorthand";
 import { PrismaClient } from "@prisma/client/extension";
+import { NextResponse } from "next/server";
 
 // create vualt...
 export async function POST(request: Request) {
@@ -24,7 +25,10 @@ export async function POST(request: Request) {
             VAULT_CREDENTIALS_EXCEEDED.msg,
             VAULT_CREDENTIALS_EXCEEDED.code)
     }
-    /*
+    return new NextResponse(null, { status: 200 })
+}
+
+   /*
     const vault = await prisma.vault.create({
         data: {
             name: "name..",
@@ -35,4 +39,3 @@ export async function POST(request: Request) {
         }
     })
         */
-}
