@@ -6,8 +6,8 @@
 export const ADMIN_USERNAME = process.env.ADMIN_USERNAME
 export const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD
 
-export const VAULT_LIMIT = process.env.VAULT_LIMIT
-export const VAULT_CREDENTIAL_LIMIT = process.env.VAULT_CREDENTIAL_LIMIT
+export const VAULT_LIMIT = Number(process.env.VAULT_LIMIT)
+export const VAULT_CREDENTIAL_LIMIT = Number(process.env.VAULT_CREDENTIAL_LIMIT)
 
 export const COOKIE_SECRET = process.env.COOKIE_SECRET as string
 
