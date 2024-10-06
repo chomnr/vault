@@ -5,17 +5,18 @@ import styles from "../../page.module.css";
 import { Input } from "@/components/input";
 
 export default function Home() {
-    const [fileName, setFileName] = useState<string | null>(null);
-    const keyUploadRef = useRef<HTMLInputElement>(null);
+    const [fileName, setFileName] = useState<string | null>(null)
+    const keyUploadRef = useRef<HTMLInputElement>(null)
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files ? e.target.files[0] : null;
-        setFileName(file ? file.name : null);
-    };
+        const file = e.target.files ? e.target.files[0] : null
+        setFileName(file ? file.name : null)
+    }
     useEffect(() => {
         if (keyUploadRef.current) {
-            keyUploadRef.current.disabled = !!fileName;
+            keyUploadRef.current.disabled = !!fileName
         }
-    }, [fileName]);
+    }, [fileName])
+    
     return (
         <div className={styles.page}>
             <main className={styles.main}>
@@ -34,7 +35,7 @@ export default function Home() {
                             <Input type="text" placeholder="Name" />
                             <h2>Maximum Credentials</h2>
                             <p>This vault can store a maximum of 100 credentials</p>
-                            <Input type="number" placeholder="Maximum" />
+                            <Input type="number" placeholder="Maximum" oninput={(e) => e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '')} />
                             <h2>Personal Key (Optional)</h2>
                             <p>You have the option to upload your own AES 256 encryption key. If not provided, a key will be automatically generated for you.</p>
                             <label htmlFor="key-upload" className="custom-file-upload">
@@ -51,5 +52,5 @@ export default function Home() {
                 </div>
             </main>
         </div>
-    );
+    )
 }

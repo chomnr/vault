@@ -46,6 +46,10 @@ export default function Home() {
       keyUploadRef.current.disabled = !!fileName;
     }
   }, [fileName]);
+
+  const validateInput = (value: string) => {
+    return /^\d*$/.test(value); 
+};
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -79,7 +83,7 @@ export default function Home() {
             <label htmlFor="key-upload" className="custom-file-upload">
               {fileName ? fileName : 'Upload AES 256 Key'}
             </label>
-            <Input id="key-upload" ref={keyUploadRef} name="key-upload" type={"file"} onchange={handleFileChange} />
+            <Input id="key-upload" ref={keyUploadRef} name="key-upload" type={"file"} max={500} onchange={handleFileChange} />
             {fileName ? <button className="submit">
             Decrypt Vault
           </button> : null}
@@ -104,3 +108,7 @@ export default function Home() {
             </form>
           </div>
           */}
+
+function setMaxCredentials(arg0: string | number) {
+  throw new Error("Function not implemented.");
+}
