@@ -61,3 +61,15 @@ export const VAULT_CREDENTIALS_EXCEEDED: ResponseError = {
     msg: `The number of credentials exceeds the maximum allowed for this vault ${VAULT_CREDENTIAL_LIMIT}`,
     code: "ERR_VAULT_CREDENTIALS_EXCEEDED"
 }
+
+export const VAULT_CREDENTIALS_INVALID: ResponseError = {
+    status: 400,
+    msg: `The number of credentials must be greater than zero`,
+    code: "ERR_VAULT_CREDENTIALS_INVALID"
+}
+
+export const VAULT_FIELDS_REQUIRED: ResponseError = {
+    status: 400,
+    msg: "Vault name and maxCredentials fields are required",
+    code: "ERR_MISSING_VAULT_FIELDS"
+}
