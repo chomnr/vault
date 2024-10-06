@@ -80,7 +80,7 @@ export default function Home() {
             <label htmlFor="key-upload" className="custom-file-upload">
               {fileName ? fileName : 'Upload AES 256 Key'}
             </label>
-            <Input id="key-upload" ref={keyUploadRef} name="key-upload" type={"file"} max={500} onchange={handleFileChange} />
+            <Input id="key-upload" ref={keyUploadRef} name="key-upload" type={"file"} onchange={handleFileChange} />
             {fileName ? <button className="submit">
             Decrypt Vault
           </button> : null}
