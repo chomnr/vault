@@ -73,3 +73,15 @@ export const VAULT_FIELDS_REQUIRED: ResponseError = {
     msg: "Vault name and maxCredentials fields are required",
     code: "ERR_MISSING_VAULT_FIELDS"
 }
+
+export const VAULT_INVALID_AES_KEY: ResponseError = {
+    status: 400,
+    msg: "The provided AES key that was uploaded is not valid",
+    code: "ERR_INVALID_AES_KEY"
+}
+
+export const VAULT_INVALID_AES_KEY_LENGTH: ResponseError = {
+    status: 400,
+    msg: "The length of the provided AES key is invalid. It must be 256 bits (32 bytes).",
+    code: "ERR_INVALID_AES_KEY_LENGTH"
+}
