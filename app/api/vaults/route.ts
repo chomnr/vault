@@ -9,7 +9,8 @@ import forge from 'node-forge'
 export async function POST(request: Request, response: Response) {
     try {
         const data = await request.json()
-        const { name, maxCredentials, key = "auto" } = data
+        const { name, maxCredentials, key = 'auto' } = data
+        const aesKey = key === undefined ? "auto" : key
         if ((name as string).length < VAULT_NAME_MIN_LENGTH ||
             (name as string).length > VAULT_NAME_MAX_LENGTH)
             return err_route(VAULT_BAD_NAME.status,
@@ -27,19 +28,19 @@ export async function POST(request: Request, response: Response) {
             return err_route(VAULT_CREDENTIALS_INVALID.status,
                 VAULT_CREDENTIALS_INVALID.msg,
                 VAULT_CREDENTIALS_INVALID.code)
-        if ((key as string) === "auto") {
+        if ((aesKey as string) === "auto") {
             const generatedKey = randomBytes(32)
             const headers = new Headers()
             headers.set("Content-Disposition", 'attachment; filename="aes-key.aes"')
             headers.set("Content-Type", 'application/octet-stream')
-            return new NextResponse(generatedKey, { status: 200, headers })
+            return new NextResponse(Buffer.from(generatedKey).toString('base64'), { status: 200, headers })
         } else {
-            if (!key.name.endsWith(".aes")) {
+            if (!aesKey.name.endsWith(".aes")) {
                 return err_route(VAULT_INVALID_AES_KEY.status,
                     VAULT_INVALID_AES_KEY.msg,
                     VAULT_INVALID_AES_KEY.code)
             }
-            const keyBuffer = Buffer.from(key.data, 'base64')
+            const keyBuffer = Buffer.from(aesKey.data, 'base64')
             if (keyBuffer.length !== 32) {
                 return err_route(VAULT_INVALID_AES_KEY_LENGTH.status,
                     VAULT_INVALID_AES_KEY_LENGTH.msg,

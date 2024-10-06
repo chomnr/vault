@@ -41,3 +41,36 @@ export async function login(prevState: { result: { error: any; code: any; timest
     await newSession(new Uint8Array(), "", remember)
     return redirect("/")
 }
+
+export async function createVault(prevState: { result: { error: any; code: any; timestamp: any; } }, form: FormData) {
+    const { name, maxCredentials, key } = {
+        name: form.get('name') as string,
+        maxCredentials: parseInt(form.get('maxCredentials') as string, 10),
+        key: form.get('key') || undefined,
+    }
+    const response = await fetch(HOST_URL + "/api/vaults", {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, maxCredentials, key }),
+    })
+    if (!response.ok) {
+        const result = await response.json();
+        return {
+            result: {
+                error: result.error,
+                code: result.code,
+                timestamp: result.timestamp || new Date().toISOString(),
+                data: null
+            }
+        }
+    }
+    return {
+        result: {
+            error: null,
+            code: null,
+            timestamp: new Date().toISOString(),
+            data: await response.text()
+        },
+    };
+}
