@@ -47,7 +47,7 @@ export default function Home() {
                     <div className="divider" style={{ marginTop: '11px', marginBottom: '11px' }}></div>
                     <div className="actions">
                         <button>Save</button>
-                        <button>Cancel</button>
+                        <button onClick={() => {window.location.href = "/"}}>Cancel</button>
                     </div>
                 </div>
             </main>
