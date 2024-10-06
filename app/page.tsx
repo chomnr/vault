@@ -47,9 +47,6 @@ export default function Home() {
     }
   }, [fileName]);
 
-  const validateInput = (value: string) => {
-    return /^\d*$/.test(value); 
-};
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -64,7 +61,7 @@ export default function Home() {
               <div className="name">VAULT ONE</div>
             </div>
             */}
-            <div id="vault_add" className="vault">
+            <div id="vault_add" className="vault" onClick={() => window.location.href = "/vault/creation"}>
               <div className="inner">
                 <div className="icon">+</div>
               </div>

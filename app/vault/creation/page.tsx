@@ -26,7 +26,7 @@ export default function Home() {
                     <form className="flex-box row">
                         <div id="1" className="vault">
                             <div className="inner">
-                                <div className="icon">1</div>
+                                <div className="icon">?</div>
                             </div>
                         </div>
                         <div className="flex-box col" style={{ gap: '7px' }}>
