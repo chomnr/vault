@@ -1,46 +1,38 @@
 'use client'
-
-import { useEffect, useRef, useState } from "react";
-import styles from "../page.module.css";
-import { Input } from "@/components/input";
+import { useState } from "react";
 import { Alert } from "@/components/alert";
-import { CheckMark } from "@/components/icons";
+import styles from "../page.module.css";
+
 
 export default function Test() {
+  const [message, setMessage] = useState("YWRzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nz");
+  const [alertMessage, setAlertMessage] = useState("SUCCESS (CLICK TO COPY)");
+
+  const handleCopy = async (msg: string) => {
+    try {
+      await navigator.clipboard.writeText(msg);
+      console.log("Message copied to clipboard!");
+      setAlertMessage("COPIED");
+      setTimeout(() => setAlertMessage("SUCCESS (CLICK TO COPY)"), 2000);
+    } catch (err) {
+      console.error("Failed to copy message: ", err);
+    }
+  };
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <div className="vault creation">
-          <h1>Vault Creation</h1>
-          <div className="divider"></div>
-          <form className="flex-box row">
-            <div id="1" className="vault">
-              <div className="inner">
-                <div className="icon">1</div>
-              </div>
-            </div>
-            <div className="flex-box col" style={{ gap: '7px' }}>
-              <h2>Vault Name</h2>
-              <p>The name you would like your vault to be</p>
-              <Input type="text" placeholder="Name" />
-              <h2>Maximum Credentials</h2>
-              <p>This vault can store a maximum of 100 credentials</p>
-              <Input type="number" placeholder="Maximum" />
-              <h2>Personal Key (Optional)</h2>
-              <p>You have the option to upload your own AES 256 encryption key. If not provided, a key will be automatically generated for you.</p>
-              <label className="custom-file-upload">Custom AES 256 Key</label>
-              <Input type="file" placeholder="Maximum" />
-            </div>
-          </form>
-          <div className="divider" style={{ marginTop: '11px', marginBottom: '11px' }}></div>
-          <div className="actions">
-            <button>Save</button>
-            <button>Cancel</button>
-          </div>
+        <div className="key-reveal">
+          <Alert
+            type={"success"}
+            code={alertMessage}
+            message={message}
+            onClick={() => handleCopy(message)}
+          />
         </div>
       </main>
     </div>
-  )
+  );
 }
 /*
 
