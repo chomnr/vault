@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import { Input } from "@/components/input";
 
 export default function Home() {
+  // Decryption UI
   const vaultsRef = useRef<HTMLDivElement>(null)
   const [vaultKeyUpload, setVaultKeyUploadUi] = useState(false)
   useEffect(() => {
@@ -48,14 +49,17 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+      {!vaultKeyUpload ? <></> : (null)}
         {!vaultKeyUpload ? (
           <><div className="vault header">{/* HEADER HERE */}</div><div ref={vaultsRef} className="vaults">
+            {/*
             <div id="1" className="vault" onClick={() => setVaultKeyUploadUi(true)}>
               <div className="inner">
                 <div className="icon">1</div>
               </div>
               <div className="name">VAULT ONE</div>
             </div>
+            */}
             <div id="vault_add" className="vault">
               <div className="inner">
                 <div className="icon">+</div>
