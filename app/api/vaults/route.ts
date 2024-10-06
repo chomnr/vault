@@ -65,7 +65,7 @@ export async function POST(request: Request, response: Response) {
             decipher.update(encrypted)
             const success = decipher.finish()
             if (success) {
-                return new NextResponse(null, { status: 200 })
+                return new NextResponse("REDACTED", { status: 200 })
             } else {
                 return err_route(VAULT_INVALID_AES_KEY.status,
                     VAULT_INVALID_AES_KEY.msg,

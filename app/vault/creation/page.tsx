@@ -55,28 +55,43 @@ export default function Home() {
                     <div className="vault creation">
                         <form ref={formRef} className="flex-box row">
                             <div className="flex-box col" style={{ gap: '7px' }}>
-                                <h2>Your Secret Key</h2>
-                                <p>Your AES 256 encryption key has been successfully generated. <b>Make sure you save the key into a file with the extension .aes</b></p>
-                                <label
-                                    className="custom-file-upload"
-                                    style={{ fontSize: '0.8rem', cursor: 'pointer' }}
-                                    onClick={() => {
-                                        const secretKey = state?.result?.data;
-                                        if (secretKey) {
-                                            navigator.clipboard.writeText(secretKey)
-                                                .then(() => {
-                                                    alert('Secret key copied to clipboard!');
-                                                })
-                                                .catch(err => {
-                                                    console.error('Failed to copy: ', err);
-                                                });
-                                        }
-                                    }}
-                                >
-                                    {state?.result?.data}
-                                </label>
+                                {state?.result?.data === "REDACTED" ? (
+                                    <><h2>Personal Key</h2><p>Your key will not be displayed because you used a personal key. <b>Please ensure you save your key securely.</b></p>
+                                        <label
+                                            className="custom-file-upload"
+                                            style={{ fontSize: '0.8rem', cursor: 'pointer' }}
+                                        >
+                                            {state?.result?.data}
+                                        </label>
+                                    </>
+                                ) : (
+                                    <><h2>Your Secret Key</h2><p>Your AES 256 encryption key has been successfully generated. <b>Make sure you save the key into a file with the extension .aes</b></p>
+                                        <label
+                                            className="custom-file-upload"
+                                            style={{ fontSize: '0.8rem', cursor: 'pointer' }}
+                                            onClick={() => {
+                                                const secretKey = state?.result?.data;
+                                                if (secretKey) {
+                                                    navigator.clipboard.writeText(secretKey)
+                                                        .then(() => {
+                                                            alert('Secret key copied to clipboard!');
+                                                        })
+                                                        .catch(err => {
+                                                            console.error('Failed to copy: ', err);
+                                                        });
+                                                }
+                                            }}
+                                        >
+                                            {state?.result?.data}
+                                        </label>
+                                    </>
+                                )}
                             </div>
                         </form>
+                        <div className="divider" style={{ marginTop: '11px', marginBottom: '11px' }}></div>
+                        <div className="actions">
+                            <button onClick={() => { window.location.href = "/" }}>Go Back</button>
+                        </div>
                     </div>
                 ) : (
                     <div className="vault creation">
