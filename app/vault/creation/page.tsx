@@ -6,6 +6,7 @@ import { Input } from "@/components/input";
 import { createVault } from "@/config/actions";
 import { useFormState } from "react-dom";
 import { Alert } from "@/components/alert";
+import { VAULT_CREDENTIAL_LIMIT } from "@/config/general";
 
 const initialState = {
     result: {
@@ -16,18 +17,15 @@ const initialState = {
     },
 };
 
-
 export default function Home() {
     const [fileName, setFileName] = useState<string | null>(null);
     const keyUploadRef = useRef<HTMLInputElement>(null);
     const formRef = useRef<HTMLFormElement>(null);
     const [state, formAction] = useFormState(createVault, initialState);
-
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files ? e.target.files[0] : null;
         setFileName(file ? file.name : null);
     };
-
     useEffect(() => {
         if (keyUploadRef.current) {
             keyUploadRef.current.disabled = !!fileName;
@@ -35,15 +33,27 @@ export default function Home() {
     }, [fileName]);
     const handleSubmit = () => {
         if (formRef.current) {
-            formRef.current.requestSubmit()
+            const formData = new FormData(formRef.current);
+            if (keyUploadRef.current?.files) {
+                const file = keyUploadRef.current.files[0];
+                if (file) {
+                    formData.append('key-upload', file);
+                }
+            }
+            formAction(formData);
+            if (keyUploadRef.current) {
+                keyUploadRef.current.value = '';
+                setFileName(null);
+            }
         }
     };
+
     return (
         <div className={styles.page}>
             <main className={styles.main}>
                 {state?.result?.data ? (
                     <div className="vault creation">
-                        <form ref={formRef} className="flex-box row" action={formAction}>
+                        <form ref={formRef} className="flex-box row">
                             <div className="flex-box col" style={{ gap: '7px' }}>
                                 <h2>Your Secret Key</h2>
                                 <p>Your AES 256 encryption key has been successfully generated. <b>Make sure you save the key into a file with the extension .aes</b></p>
@@ -75,7 +85,7 @@ export default function Home() {
                             <Alert type={"danger"} code={state.result.code} message={state.result.error} />
                         )}
                         <div className="divider"></div>
-                        <form ref={formRef} className="flex-box row" action={formAction}>
+                        <form ref={formRef} className="flex-box row">
                             <div id="1" className="vault">
                                 <div className="inner">
                                     <div className="icon">?</div>
@@ -87,23 +97,24 @@ export default function Home() {
                                 <Input name="name" type="text" placeholder="Name" />
                                 <h2>Maximum Credentials</h2>
                                 <p>This vault can store a maximum of VAULT_CREDENTIAL_LIMIT credentials.</p>
-                                <Input
+                                <input
                                     name="maxCredentials"
                                     type="number"
                                     placeholder="Maximum"
-                                    oninput={(e) => e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '')}
+                                    onInput={(e) => e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '')}
                                 />
                                 <h2>Personal Key (Optional)</h2>
                                 <p>You have the option to upload your own AES 256 encryption key <b>(must be in base64)</b>. If not provided, a key will be automatically generated for you.</p>
                                 <label htmlFor="key-upload" className="custom-file-upload">
                                     {fileName ? fileName : 'Upload AES 256 Key'}
                                 </label>
-                                <Input
+                                <input
                                     id="key-upload"
                                     ref={keyUploadRef}
                                     name="key-upload"
                                     type="file"
-                                    onchange={handleFileChange}
+                                    accept=".aes"
+                                    onChange={handleFileChange} // Changed to onChange
                                 />
                             </div>
                         </form>

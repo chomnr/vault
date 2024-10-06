@@ -12,10 +12,11 @@ interface InputProps {
     min?: number
     max?: number
     oninput?: (e: React.FormEvent<HTMLInputElement>) => void
+    accept?: string
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-    ({ id, type, name, placeholder, required, value, onchange, oninput, disabled, max, min = 1 }, ref) => {
+    ({ id, type, name, placeholder, required, value, onchange, oninput, disabled, max, min = 1, accept }, ref) => {
         return (
             <input
                 id={id}
@@ -29,6 +30,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                 disabled={disabled}
                 max={max}
                 min={min}
+                accept={accept}
                 onInput={oninput}
             />
         )
