@@ -1,4 +1,4 @@
-import { USERNAME_MAX_LENGTH, USERNAME_MIN_LENGTH } from "./general"
+import { USERNAME_MAX_LENGTH, USERNAME_MIN_LENGTH, VAULT_MAX_LENGTH, VAULT_MIN_LENGTH } from "./general"
 
 interface ResponseError {
     status: number,
@@ -38,4 +38,14 @@ export const LOGIN_EXPIRED: ResponseError = {
     status: 401,
     msg: `The session has expired, please log in again`,
     code: "ERR_LOGIN_SESSION_EXPIRED"
+}
+
+/* =======================================
+   VAULT ERROR
+   ======================================= */
+   
+export const VAULT_BAD_NAME: ResponseError = {
+    status: 400,
+    msg: `The vault name must be between ${VAULT_MIN_LENGTH} and ${VAULT_MAX_LENGTH} characters long`,
+    code: "ERR_VAULT_BAD_NAME"
 }
