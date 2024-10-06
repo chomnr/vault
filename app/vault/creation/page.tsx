@@ -46,7 +46,7 @@ export default function Home() {
                         <form ref={formRef} className="flex-box row" action={formAction}>
                             <div className="flex-box col" style={{ gap: '7px' }}>
                                 <h2>Your Secret Key</h2>
-                                <p>Your AES 256 encryption key has been successfully generated! Make sure you save the key into a file with the extension .aes</p>
+                                <p>Your AES 256 encryption key has been successfully generated. <b>Make sure you save the key into a file with the extension .aes</b></p>
                                 <label
                                     className="custom-file-upload"
                                     style={{ fontSize: '0.8rem', cursor: 'pointer' }}
