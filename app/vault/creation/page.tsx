@@ -34,7 +34,7 @@ export default function Home() {
                             <p>The name you would like your vault to be</p>
                             <Input type="text" placeholder="Name" />
                             <h2>Maximum Credentials</h2>
-                            <p>This vault can store a maximum of 100 credentials</p>
+                            <p>This vault can store a maximum of VAULT_CREDENTIAL_LIMIT credentials.</p>
                             <Input type="number" placeholder="Maximum" oninput={(e) => e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '')} />
                             <h2>Personal Key (Optional)</h2>
                             <p>You have the option to upload your own AES 256 encryption key. If not provided, a key will be automatically generated for you.</p>
