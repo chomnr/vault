@@ -1,4 +1,4 @@
-import { VAULT_NOT_SELECTED, VAULT_KEY_NOT_FOUND, VAULT_NOT_FOUND, LOGIN_REQUIRED, VAULT_DECRYPTION_FAILED, VAULT_INVALID_AES_KEY, VAULT_INVALID_AES_KEY_LENGTH } from "@/config/response";
+import { VAULT_NOT_SELECTED, VAULT_NOT_FOUND, LOGIN_REQUIRED, VAULT_DECRYPTION_FAILED, VAULT_INVALID_AES_KEY, VAULT_INVALID_AES_KEY_LENGTH } from "@/config/response";
 import { err_route } from "@/config/shorthand";
 import { NextResponse } from "next/server";
 import forge from 'node-forge';
@@ -21,7 +21,6 @@ export async function POST(request: Request) {
             return err_route(VAULT_NOT_SELECTED.status,
                 VAULT_NOT_SELECTED.msg,
                 VAULT_NOT_SELECTED.code)
-        console.log("1")
         const vault = await prisma.vault.findUnique({
             where: { id: session.vault?.id }
         });
