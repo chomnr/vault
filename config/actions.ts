@@ -4,7 +4,8 @@ import { redirect } from 'next/navigation'
 import { COOKIE_MAX_AGE, HOST_URL } from './general'
 import { newSession, SESSION_OPTIONS, SessionData } from './session';
 import { getIronSession } from 'iron-session';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
+import { LOGIN_REQUIRED } from './response';
 
 export async function isAuthenticated() {
     const session = await getIronSession<SessionData>(cookies(), SESSION_OPTIONS)
@@ -55,9 +56,12 @@ export async function createVault(prevState: { result: { error: any; code: any; 
     })
     const response = await fetch(HOST_URL + "/api/vaults", {
         method: 'POST',
+        headers: {
+            "Cookie": headers().get("cookie") as string
+        },
         credentials: 'include',
-        body: formData 
-    })
+        body: formData
+    });
     if (!response.ok) {
         const result = await response.json()
         return {
