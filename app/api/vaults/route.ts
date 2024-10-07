@@ -22,7 +22,7 @@ export async function POST(request: Request, response: Response) {
             return err_route(VAULT_LIMIT_EXCEEDED.status,
                 VAULT_LIMIT_EXCEEDED.msg,
                 VAULT_LIMIT_EXCEEDED.code)
-        } 
+        }
         const formData = await request.formData()
         const name = formData.get('name') as string
         const maxCredentials = parseInt(formData.get('maxCredentials') as string)
@@ -48,13 +48,20 @@ export async function POST(request: Request, response: Response) {
         let aesKey: string
         if (!keyFile) {
             const generatedKey = randomBytes(32)
+            const iv = forge.random.getBytesSync(16);
+            const cipher = forge.cipher.createCipher('AES-CBC', forge.util.createBuffer(generatedKey));
+            cipher.start({ iv });
+            cipher.update(forge.util.createBuffer("secret"));
+            cipher.finish();
+            const encrypted = cipher.output
             const headers = new Headers()
             headers.set("Content-Disposition", 'attachment; filename="aes-key.aes"')
             headers.set("Content-Type", 'application/octet-stream')
             await prisma.vault.create({
                 data: {
                     name: name,
-                    maxCredentials: maxCredentials
+                    maxCredentials: maxCredentials,
+                    secret: Buffer.from(encrypted.getBytes(), 'binary').toString("base64")
                 },
             });
             prisma.$disconnect()
@@ -78,7 +85,7 @@ export async function POST(request: Request, response: Response) {
             const iv = forge.random.getBytesSync(16)
             const cipher = forge.cipher.createCipher('AES-CBC', forge.util.hexToBytes(aesKey))
             cipher.start({ iv })
-            cipher.update(forge.util.createBuffer('data'))
+            cipher.update(forge.util.createBuffer('secret'))
             cipher.finish()
             const encrypted = cipher.output
             const decipher = forge.cipher.createDecipher('AES-CBC', forge.util.hexToBytes(aesKey))
@@ -90,6 +97,7 @@ export async function POST(request: Request, response: Response) {
                     data: {
                         name: name,
                         maxCredentials: maxCredentials,
+                        secret: Buffer.from(encrypted.getBytes(), 'binary').toString("base64")
                     },
                 });
                 prisma.$disconnect()
