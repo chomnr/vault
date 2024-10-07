@@ -20,6 +20,7 @@ model Vault {
   maxCredentials  Int
   credentials     Credential[]
   secret          String
+  iv              String
 }
 
 type Credential {
