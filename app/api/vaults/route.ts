@@ -4,14 +4,15 @@ import { err_route } from "@/config/shorthand";
 import { NextResponse } from "next/server";
 import { randomBytes } from 'crypto';
 import forge from 'node-forge'
+import { PrismaClient } from "@prisma/client";
 
 export async function POST(request: Request, response: Response) {
+    const prisma = new PrismaClient()
     try {
         const formData = await request.formData()
         const name = formData.get('name') as string
         const maxCredentials = parseInt(formData.get('maxCredentials') as string)
         const keyFile = formData.get('key-upload') as File | null
-        console.log(keyFile)
         if (name.length < VAULT_NAME_MIN_LENGTH || name.length > VAULT_NAME_MAX_LENGTH)
             return err_route(VAULT_BAD_NAME.status,
                 VAULT_BAD_NAME.msg,
@@ -36,6 +37,13 @@ export async function POST(request: Request, response: Response) {
             const headers = new Headers()
             headers.set("Content-Disposition", 'attachment; filename="aes-key.aes"')
             headers.set("Content-Type", 'application/octet-stream')
+            await prisma.vault.create({
+                data: {
+                    name: name,
+                    maxCredentials: maxCredentials,
+                    credentials: {}
+                },
+            });
             return new NextResponse(Buffer.from(generatedKey).toString('base64'), { status: 200, headers })
         } else {
             const fileName = keyFile.name
@@ -65,6 +73,13 @@ export async function POST(request: Request, response: Response) {
             decipher.update(encrypted)
             const success = decipher.finish()
             if (success) {
+                await prisma.vault.create({
+                    data: {
+                        name: name,
+                        maxCredentials: maxCredentials,
+                        credentials: {}
+                    },
+                });
                 return new NextResponse("REDACTED", { status: 200 })
             } else {
                 return err_route(VAULT_INVALID_AES_KEY.status,
@@ -72,7 +87,8 @@ export async function POST(request: Request, response: Response) {
                     VAULT_INVALID_AES_KEY.code)
             }
         }
-    } catch {
+    } catch (er) {
+        console.log(er)
         return err_route(VAULT_FIELDS_REQUIRED.status,
             VAULT_FIELDS_REQUIRED.msg,
             VAULT_FIELDS_REQUIRED.code)
