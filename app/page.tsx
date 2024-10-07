@@ -98,7 +98,6 @@ export default function Home() {
                     className="vault"
                     onClick={() => {
                       handleVaultLink(vault['id']);
-                      localStorage.setItem('currentVaultNumber', (index + 1).toString());
                     }}
                   >
                     <div className="inner">
