@@ -2,11 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import styles from "../../page.module.css";
-import { Input } from "@/components/input";
 import { createVault } from "@/config/actions";
 import { useFormState } from "react-dom";
 import { Alert } from "@/components/alert";
-import { VAULT_CREDENTIAL_LIMIT } from "@/config/general";
 import React from "react";
 
 const initialState = {
