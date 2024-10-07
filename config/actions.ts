@@ -17,22 +17,6 @@ export async function isAuthenticated() {
     }
 }
 
-export async function getSelectedVault() {
-    if (await isAuthenticated()) {
-        const session = await getIronSession<SessionData>(cookies(), SESSION_OPTIONS)
-        if (session.vault !== undefined) {
-            return {
-                id: session.vault.id,
-                name: session.vault.name
-            }
-        } else {
-            return null
-        }
-    } else {
-        return null
-    }
-}
-
 export async function login(prevState: { result: { error: any; code: any; timestamp: any; } }, form: FormData) {
     const { username, password, remember } = {
         username: form.get('username') as string,
