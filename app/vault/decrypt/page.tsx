@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import styles from "../../page.module.css";
-import { createVault } from "@/config/actions";
+import { decryptVault } from "@/config/actions";
 import { useFormState } from "react-dom";
 import { Alert } from "@/components/alert";
 import React from "react";
@@ -20,14 +20,12 @@ export default function Home() {
     const [fileName, setFileName] = useState<string | null>(null);
     const keyUploadRef = useRef<HTMLInputElement>(null);
     const formRef = useRef<HTMLFormElement>(null);
-    const [state, formAction] = useFormState(createVault, initialState);
+    const [state, formAction] = useFormState(decryptVault, initialState);
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files ? e.target.files[0] : null;
         setFileName(file ? file.name : null);
     };
     const [vault, setVault] = useState<{ id: string; name: string } | null>(null);
-    const [error, setError] = useState<{ message: string; code: string; timestamp: string } | null>(null);
-    const [currentVaultNumber, setCurrentVaultNumber] = useState<string | null>(null);
     useEffect(() => {
         if (keyUploadRef.current) {
             keyUploadRef.current.disabled = !!fileName;
@@ -58,36 +56,17 @@ export default function Home() {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ id: 'your-vault-id' }),
                 });
-
                 if (response.ok) {
                     const data = await response.json();
                     setVault(data);
-                } else {
-                    const errorData = await response.json();
-                    setError({
-                        message: errorData.msg,
-                        code: errorData.code,
-                        timestamp: new Date().toISOString()
-                    });
                 }
             } catch (err) {
-                setError({
-                    message: 'Failed to fetch vault data.',
-                    code: 'FETCH_ERROR',
-                    timestamp: new Date().toISOString()
-                });
+                console.log(err)
             }
         };
-
         fetchVaultDetails();
     }, []);
-
-    useEffect(() => {
-        setCurrentVaultNumber(localStorage.getItem('currentVaultNumber'));
-    }, []);
-
     return (
         <div className={styles.page}>
             <main className={styles.main}>
