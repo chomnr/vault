@@ -39,7 +39,7 @@ export async function login(prevState: { result: { error: any; code: any; timest
             }
         }
     }
-    await newSession(new Uint8Array(), "", remember)
+    await newSession(new Uint8Array(), undefined, remember)
     return redirect("/")
 }
 
