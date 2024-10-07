@@ -5,6 +5,7 @@ import { Navbar } from "@/components/navbar";
 import { FloatingLogout } from "@/components/logout";
 import { isAuthenticated } from "@/config/actions";
 import { Authenticated } from "@/components/auth";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,9 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${fontSans.variable} ${fontMono.variable}`}>
-        <Navbar/>
+        <Navbar />
         <Authenticated>
-          <FloatingLogout/>
+          <FloatingLogout />
         </Authenticated>
         {children}
       </body>
