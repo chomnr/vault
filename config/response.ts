@@ -1,4 +1,4 @@
-import { USERNAME_MAX_LENGTH, USERNAME_MIN_LENGTH, VAULT_CREDENTIAL_LIMIT, VAULT_LIMIT, VAULT_NAME_MAX_LENGTH, VAULT_NAME_MIN_LENGTH } from "./general"
+import { USERNAME_MAX_LENGTH, USERNAME_MIN_LENGTH, VAULT_CREDENTIAL_LIMIT, VAULT_ID_MIN_LENGTH, VAULT_LIMIT, VAULT_NAME_MAX_LENGTH, VAULT_NAME_MIN_LENGTH } from "./general"
 
 interface ResponseError {
     status: number,
@@ -93,7 +93,25 @@ export const VAULT_FAILED_TO_RETRIEVE: ResponseError = {
 }
 
 export const VAULT_LIMIT_EXCEEDED: ResponseError = {
-    status: 403, // or another appropriate status code
+    status: 403,
     msg: `Cannot create vault: The limit of ${VAULT_LIMIT} vaults has been exceeded.`,
     code: "ERR_VAULT_LIMIT_EXCEEDED"
+}
+
+export const VAULT_LINKING_ERROR: ResponseError = {
+    status: 500,
+    msg: "An unknown error has occurred while linking the vault to the current session.",
+    code: "ERR_VAULT_LINKING_FAILED"
+}
+
+export const VAULT_NOT_FOUND: ResponseError = {
+    status: 404,
+    msg: "Vault not found: The requested vault does not exist.",
+    code: "ERR_VAULT_NOT_FOUND"
+}
+
+export const VAULT_ID_INVALID_LENGTH: ResponseError = {
+    status: 400,
+    msg: `Invalid vault ID: The ID must be exactly ${VAULT_ID_MIN_LENGTH} characters long.`,
+    code: "ERR_VAULT_ID_INVALID_LENGTH"
 }

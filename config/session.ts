@@ -5,7 +5,6 @@ import { Vault } from "@prisma/client";
 
 export interface SessionData {
     timeStamp: number,
-    key: Uint8Array | undefined,
     vault: SessionVault | undefined,
     remember: boolean
 }
@@ -25,10 +24,9 @@ export const SESSION_OPTIONS: SessionOptions = {
     },
 };
 
-export const newSession = async (key: Uint8Array, vault: SessionVault | undefined, remember: boolean) => {
+export const newSession = async (vault: SessionVault | undefined, remember: boolean) => {
     const session = await getIronSession<SessionData>(cookies(), SESSION_OPTIONS)
     session.timeStamp = Date.now()
-    session.key = key
     session.vault = vault
     session.remember = remember
     await session.save()
