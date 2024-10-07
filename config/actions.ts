@@ -82,3 +82,43 @@ export async function createVault(prevState: { result: { error: any; code: any; 
         }
     }
 }
+
+export async function decryptVault(prevState: { result: { error: any; code: any; timestamp: any } }, form: FormData) {
+    const formData = new FormData();
+    form.forEach((value, key) => {
+        if (key === 'key-upload') {
+            if ((value as File).size > 0) {
+                formData.append(key, value);
+            } else {
+                throw new Error("Key file must not be empty.");
+            }
+        }
+    });
+    const response = await fetch(HOST_URL + "/api/vaults/decrypt", {
+        method: 'POST',
+        headers: {
+            "Cookie": headers().get("cookie") as string
+        },
+        credentials: 'include',
+        body: formData
+    });
+    if (!response.ok) {
+        const result = await response.json();
+        return {
+            result: {
+                error: result.error,
+                code: result.code,
+                timestamp: result.timestamp || new Date().toISOString(),
+                data: null
+            }
+        };
+    }
+    return {
+        result: {
+            error: null,
+            code: null,
+            timestamp: new Date().toISOString(),
+            data: await response.json()
+        }
+    };
+}
