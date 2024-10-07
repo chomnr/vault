@@ -27,6 +27,7 @@ export default function Home() {
     };
     const [vault, setVault] = useState<{ id: string; name: string } | null>(null);
     const [error, setError] = useState<{ message: string; code: string; timestamp: string } | null>(null);
+    const [currentVaultNumber, setCurrentVaultNumber] = useState<string | null>(null);
     useEffect(() => {
         if (keyUploadRef.current) {
             keyUploadRef.current.disabled = !!fileName;
@@ -50,39 +51,43 @@ export default function Home() {
     };
     useEffect(() => {
         const fetchVaultDetails = async () => {
-          try {
-            const response = await fetch('/api/vaults/selected', {
-              method: 'POST',
-              credentials: 'include',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ id: 'your-vault-id' }),
-            });
-    
-            if (response.ok) {
-              const data = await response.json();
-              setVault(data);
-            } else {
-              const errorData = await response.json();
-              setError({
-                message: errorData.msg,
-                code: errorData.code,
-                timestamp: new Date().toISOString()
-              });
+            try {
+                const response = await fetch('/api/vaults/selected', {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id: 'your-vault-id' }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setVault(data);
+                } else {
+                    const errorData = await response.json();
+                    setError({
+                        message: errorData.msg,
+                        code: errorData.code,
+                        timestamp: new Date().toISOString()
+                    });
+                }
+            } catch (err) {
+                setError({
+                    message: 'Failed to fetch vault data.',
+                    code: 'FETCH_ERROR',
+                    timestamp: new Date().toISOString()
+                });
             }
-          } catch (err) {
-            setError({
-              message: 'Failed to fetch vault data.',
-              code: 'FETCH_ERROR',
-              timestamp: new Date().toISOString()
-            });
-          }
         };
-    
+
         fetchVaultDetails();
-      }, []);
-    
+    }, []);
+
+    useEffect(() => {
+        setCurrentVaultNumber(localStorage.getItem('currentVaultNumber'));
+    }, []);
+
     return (
         <div className={styles.page}>
             <main className={styles.main}>
@@ -95,11 +100,11 @@ export default function Home() {
                     <form ref={formRef} className="flex-box row">
                         <div id="1" className="vault">
                             <div className="inner">
-                                <div className="icon">?</div>
+                                <div className="icon">{currentVaultNumber}</div>
                             </div>
                         </div>
                         <div className="flex-box col" style={{ gap: '7px' }}>
-                        <h2>Decryption Key ({vault?.name})</h2> <p>To access this vault, you must upload the AES 256 encryption key that is bound to it. This key is required to view the vault's contents. Once inside the vault, each value must be manually decrypted using the provided key.</p>
+                            <h2>Decryption Key ({vault?.name})</h2> <p>To access this vault, you must upload the AES 256 encryption key that is bound to it. This key is required to view the vault's contents. Once inside the vault, each value must be manually decrypted using the provided key.</p>
                             <label htmlFor="key-upload" className="custom-file-upload">
                                 {fileName ? fileName : 'Upload AES 256 Key'}
                             </label>

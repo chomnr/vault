@@ -6,11 +6,11 @@ import { Input } from "@/components/input";
 
 export default function Home() {
   const vaultsRef = useRef<HTMLDivElement>(null);
-  const [vaultKeyUpload, setVaultKeyUploadUi] = useState(false);
+  const [vaultKeyUpload] = useState(false);
   const [vaults, setVaults] = useState([]);
   const [fileName, setFileName] = useState<string | null>(null);
   const keyUploadRef = useRef<HTMLInputElement>(null);
-
+  
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null;
     setFileName(file ? file.name : null);
@@ -96,7 +96,10 @@ export default function Home() {
                     key={vault['id']}
                     id={vault['id']}
                     className="vault"
-                    onClick={() => {handleVaultLink(vault['id'])}}
+                    onClick={() => {
+                      handleVaultLink(vault['id']);
+                      localStorage.setItem('currentVaultNumber', (index + 1).toString());
+                    }}
                   >
                     <div className="inner">
                       <div className="icon">{index + 1}</div>
