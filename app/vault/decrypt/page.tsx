@@ -81,7 +81,7 @@ export default function Home() {
                     <div className="divider"></div>
                     <form ref={formRef} className="flex-box row">
                         <div className="flex-box col" style={{ gap: '7px' }}>
-                            <h2>Decryption Key ({vault?.name})</h2> <p>To access this vault, you must upload the AES 256 encryption key that is bound to it. This key is required to view the vault's contents. Once inside the vault, each value must be manually decrypted using the provided key.</p>
+                            <h2>Decryption Key ({vault?.name})</h2><p>To access this vault, you must upload the AES 256 encryption key that is bound to it. This key is required to view the vault's contents. Once inside the vault, each value must be manually decrypted using the provided key.</p>
                             <label htmlFor="key-upload" className="custom-file-upload">
                                 {fileName ? fileName : 'Upload AES 256 Key'}
                             </label>
