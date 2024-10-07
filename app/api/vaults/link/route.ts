@@ -1,0 +1,1 @@
+// link the vault to a session.
