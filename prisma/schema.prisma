@@ -15,21 +15,16 @@ datasource db {
 
 
 model Vault {
-  id        String     @id @default(uuid()) @map("_id")
-  name      String
-  maxCredentials Int
-  credentials Credential[]
+  id              String       @id @default(uuid()) @map("_id")
+  name            String
+  maxCredentials  Int
+  credentials     Credential[]
 }
 
-
-// keep the credentials inside of vault???
-model Credential {
-  id          String   @id @default(uuid()) @map("_id")
-  vaultId     String
-  vault       Vault    @relation(fields: [vaultId], references: [id])
+type Credential {
   type        String
   name        String
   data        Json
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  updatedAt   DateTime
 }
