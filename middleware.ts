@@ -17,6 +17,15 @@ export async function middleware(request: NextRequest) {
         if (request.nextUrl.pathname === '/login' || request.nextUrl.pathname === '/api/login') {
             return NextResponse.redirect(new URL('/', request.url))
         }
+
+        if (request.nextUrl.pathname === "/vault/decrypt" && session.vault === undefined) {
+            return NextResponse.redirect(new URL('/', request.url))
+        }
+
+        if (request.nextUrl.pathname === "/" && session.vault !== undefined) {
+            session.vault = undefined
+            await session.save()
+        }
     }
     return result
 }

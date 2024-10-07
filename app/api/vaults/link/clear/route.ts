@@ -11,4 +11,5 @@ export async function POST(request: Request) {
             LOGIN_REQUIRED.msg,
             LOGIN_REQUIRED.code)
     session.vault = undefined
+    await session.save()
 }
