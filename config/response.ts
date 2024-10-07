@@ -1,4 +1,4 @@
-import { USERNAME_MAX_LENGTH, USERNAME_MIN_LENGTH, VAULT_CREDENTIAL_LIMIT, VAULT_NAME_MAX_LENGTH, VAULT_NAME_MIN_LENGTH } from "./general"
+import { USERNAME_MAX_LENGTH, USERNAME_MIN_LENGTH, VAULT_CREDENTIAL_LIMIT, VAULT_LIMIT, VAULT_NAME_MAX_LENGTH, VAULT_NAME_MIN_LENGTH } from "./general"
 
 interface ResponseError {
     status: number,
@@ -84,4 +84,16 @@ export const VAULT_INVALID_AES_KEY_LENGTH: ResponseError = {
     status: 400,
     msg: "The length of the provided AES key is invalid. It must be 256 bits (32 bytes).",
     code: "ERR_INVALID_AES_KEY_LENGTH"
+}
+
+export const VAULT_FAILED_TO_RETRIEVE: ResponseError = {
+    status: 500,
+    msg: "Failed to retrieve vaults. Please try again later.",
+    code: "ERR_FAILED_TO_RETRIEVE_VAULTS"
+}
+
+export const VAULT_LIMIT_EXCEEDED: ResponseError = {
+    status: 403, // or another appropriate status code
+    msg: `Cannot create vault: The limit of ${VAULT_LIMIT} vaults has been exceeded.`,
+    code: "ERR_VAULT_LIMIT_EXCEEDED"
 }
