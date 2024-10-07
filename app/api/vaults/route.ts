@@ -93,15 +93,3 @@ export async function POST(request: Request, response: Response) {
             VAULT_FIELDS_REQUIRED.code)
     }
 }
-
-/*
- const vault = await prisma.vault.create({
-     data: {
-         name: "name..",
-         maxCredentials: 100,
-         credentials: {
-             create: []
-         }
-     }
- })
-     */
