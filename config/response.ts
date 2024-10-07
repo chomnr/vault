@@ -115,3 +115,9 @@ export const VAULT_ID_INVALID_LENGTH: ResponseError = {
     msg: `Invalid vault ID: The ID must be exactly ${VAULT_ID_MIN_LENGTH} characters long.`,
     code: "ERR_VAULT_ID_INVALID_LENGTH"
 }
+
+export const VAULT_NOT_SELECTED_OR_DECRYPTED: ResponseError = {
+    status: 400,
+    msg: "You must have a vault selected and not decrypted to obtain information about it through this api.",
+    code: "ERR_VAULT_NOT_SELECTED_OR_DECRYPTED"
+}
