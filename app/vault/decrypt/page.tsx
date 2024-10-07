@@ -75,6 +75,9 @@ export default function Home() {
                     {state?.result?.error && (
                         <Alert type={"danger"} code={state.result.code} message={state.result.error} />
                     )}
+                    {state?.result?.data && (
+                        <Alert type={"success"} code={state.result.data.code} message={state.result.data.msg} />
+                    )}
                     <div className="divider"></div>
                     <form ref={formRef} className="flex-box row">
                         <div className="flex-box col" style={{ gap: '7px' }}>

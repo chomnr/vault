@@ -52,7 +52,12 @@ export async function POST(request: Request) {
                     session.vault.key = aesKey
                     await session.save()
                     // todo: redirect to vault...
-                    return NextResponse.json(null, { status: 200 });
+                    return NextResponse.json({
+                        code: "SUCCESS",
+                        msg: "Vault decrypted successfully. Redirecting..."
+                    }, {
+                        status: 200
+                    });
                 } else {
                     return err_route(VAULT_DECRYPTION_FAILED.status,
                         VAULT_DECRYPTION_FAILED.msg,
