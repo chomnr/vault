@@ -121,3 +121,27 @@ export const VAULT_NOT_SELECTED_OR_DECRYPTED: ResponseError = {
     msg: "You must have a vault selected and not decrypted to obtain information about it through this api.",
     code: "ERR_VAULT_NOT_SELECTED_OR_DECRYPTED"
 }
+
+export const VAULT_KEY_NOT_FOUND: ResponseError = {
+    status: 404,
+    msg: "The decryption key for the selected vault was not found. Please ensure you have the correct key uploaded.",
+    code: "ERR_VAULT_KEY_NOT_FOUND"
+};
+
+export const VAULT_DECRYPTION_FAILED: ResponseError = {
+    status: 500,
+    msg: "Decryption of the selected vault has failed. Please check the key and try again.",
+    code: "ERR_VAULT_DECRYPTION_FAILED"
+};
+
+export const VAULT_NOT_SELECTED: ResponseError = {
+    status: 400,
+    msg: "No vault has been selected. Please select a vault before proceeding.",
+    code: "ERR_VAULT_NOT_SELECTED"
+};
+
+export const VAULT_ENCRYPTION_FAILED: ResponseError = {
+    status: 500,
+    msg: "Encryption of the vault has failed. Please check your input and try again.",
+    code: "ERR_VAULT_ENCRYPTION_FAILED"
+};
