@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./page.module.css";
 import { Input } from "@/components/input";
 
-
 export default function Home() {
   const vaultsRef = useRef<HTMLDivElement>(null);
   const [vaultKeyUpload, setVaultKeyUploadUi] = useState(false);
