@@ -41,6 +41,20 @@ export default function Home() {
     handleVaultRetrieval();
   }, []);
 
+  const handleVaultLink = async (id: string) => {
+    const response = await fetch('/api/vaults/link', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: id }),
+    });
+    if (response.redirected) {
+      window.location.href = response.url;
+    }
+  };
+
   useEffect(() => {
     const vaults = vaultsRef.current;
     if (vaults) {
@@ -82,7 +96,7 @@ export default function Home() {
                     key={vault['id']}
                     id={vault['id']}
                     className="vault"
-                    onClick={() => setVaultKeyUploadUi(true)}
+                    onClick={() => {handleVaultLink(vault['id'])}}
                   >
                     <div className="inner">
                       <div className="icon">{index + 1}</div>

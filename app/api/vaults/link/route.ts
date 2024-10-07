@@ -34,7 +34,7 @@ export async function POST(request: Request) {
                 name: vault.name,
                 key: undefined
             }
-        return new NextResponse(null, { status: 200 })
+        return NextResponse.redirect(new URL("/vault/decrypt", request.url), 303)
         } else {
             return err_route(VAULT_NOT_FOUND.status,
                 VAULT_NOT_FOUND.msg,
