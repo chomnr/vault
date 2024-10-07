@@ -4,10 +4,44 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./page.module.css";
 import { Input } from "@/components/input";
 
+
 export default function Home() {
-  // Decryption UI
-  const vaultsRef = useRef<HTMLDivElement>(null)
-  const [vaultKeyUpload, setVaultKeyUploadUi] = useState(false)
+  const vaultsRef = useRef<HTMLDivElement>(null);
+  const [vaultKeyUpload, setVaultKeyUploadUi] = useState(false);
+  const [vaults, setVaults] = useState([]);
+  const [fileName, setFileName] = useState<string | null>(null);
+  const keyUploadRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
+    setFileName(file ? file.name : null);
+  };
+
+  useEffect(() => {
+    if (keyUploadRef.current) {
+      keyUploadRef.current.disabled = !!fileName;
+    }
+  }, [fileName]);
+
+  const handleVaultRetrieval = async () => {
+    try {
+      const response = await fetch('/api/vaults', {
+        method: 'GET',
+        credentials: 'include',
+      });
+      if (!response.ok) {
+        throw new Error('Failed to retrieve vaults');
+      }
+      const vaultsData = await response.json();
+      setVaults(vaultsData);
+    } catch (error) {
+      console.error('Error retrieving vaults:', error);
+    }
+  };
+  useEffect(() => {
+    handleVaultRetrieval();
+  }, []);
+
   useEffect(() => {
     const vaults = vaultsRef.current;
     if (vaults) {
@@ -33,57 +67,62 @@ export default function Home() {
         };
       });
     }
-  }, [vaultKeyUpload]);
-
-  const [fileName, setFileName] = useState<string | null>(null);
-  const keyUploadRef = useRef<HTMLInputElement>(null);
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files ? e.target.files[0] : null;
-    setFileName(file ? file.name : null);
-  };
-  useEffect(() => {
-    if (keyUploadRef.current) {
-      keyUploadRef.current.disabled = !!fileName;
-    }
-  }, [fileName]);
+  }, [vaults]);
 
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-      {!vaultKeyUpload ? <></> : (null)}
+        {!vaultKeyUpload ? <></> : (null)}
         {!vaultKeyUpload ? (
-          <><div className="vault header">{/* HEADER HERE */}</div><div ref={vaultsRef} className="vaults">
-            {/*
-            <div id="1" className="vault" onClick={() => setVaultKeyUploadUi(true)}>
-              <div className="inner">
-                <div className="icon">1</div>
+          <>
+            <div className="vault header">{/* HEADER HERE */}</div>
+            <div ref={vaultsRef} className="vaults">
+              {vaults.length > 0 ? (
+                vaults.map((vault, index) => (
+                  <div
+                    key={vault['id']}
+                    id={vault['id']}
+                    className="vault"
+                    onClick={() => setVaultKeyUploadUi(true)}
+                  >
+                    <div className="inner">
+                      <div className="icon">{index + 1}</div>
+                    </div>
+                    <div className="name">{vault['name']}</div>
+                  </div>
+                ))
+              ) : (
+                null
+              )}
+
+              <div
+                id="vault_add"
+                className="vault"
+                onClick={() => window.location.href = "/vault/creation"}
+              >
+                <div className="inner">
+                  <div className="icon">+</div>
+                </div>
               </div>
-              <div className="name">VAULT ONE</div>
             </div>
-            */}
-            <div id="vault_add" className="vault" onClick={() => window.location.href = "/vault/creation"}>
-              <div className="inner">
-                <div className="icon">+</div>
-              </div>
-            </div>
-          </div></>
+          </>
         ) : (
           <form className="key-upload">
-            {/*
-          <Alert type={"danger"} code="ERR_BAD_KEY" message="The key you uploaded does not belong to the corresponding vault" />
-          <Alert type={"success"} code="Success" message="The key has successfully decrypted the contents you may proceed" />
-          */}
-            {/*
-          <Alert type={"danger"} code="ERR_BAD_KEY" message="The key you uploaded does not belong to the corresponding vault" />
-          <Alert type={"success"} code="Success" message="The key has successfully decrypted the contents you may proceed" />
-          */}
             <label htmlFor="key-upload" className="custom-file-upload">
               {fileName ? fileName : 'Upload AES 256 Key'}
             </label>
-            <Input id="key-upload" ref={keyUploadRef} name="key-upload" type={"file"} onchange={handleFileChange} />
-            {fileName ? <button className="submit">
-            Decrypt Vault
-          </button> : null}
+            <Input
+              id="key-upload"
+              ref={keyUploadRef}
+              name="key-upload"
+              type={"file"}
+              onchange={handleFileChange}
+            />
+            {fileName ? (
+              <button className="submit">
+                Decrypt Vault
+              </button>
+            ) : null}
           </form>
         )}
       </main>
