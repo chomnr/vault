@@ -1,14 +1,28 @@
-import { VAULT_NAME_MIN_LENGTH, VAULT_NAME_MAX_LENGTH, VAULT_CREDENTIAL_LIMIT } from "@/config/general";
-import { VAULT_BAD_NAME, VAULT_CREDENTIALS_EXCEEDED, VAULT_CREDENTIALS_INVALID, VAULT_FIELDS_REQUIRED, VAULT_INVALID_AES_KEY, VAULT_INVALID_AES_KEY_LENGTH, VAULT_MAX_CREDENTIALS_NOT_INTEGER } from "@/config/response";
+import { VAULT_NAME_MIN_LENGTH, VAULT_NAME_MAX_LENGTH, VAULT_CREDENTIAL_LIMIT, VAULT_LIMIT } from "@/config/general";
+import { LOGIN_REQUIRED, VAULT_BAD_NAME, VAULT_CREDENTIALS_EXCEEDED, VAULT_CREDENTIALS_INVALID, VAULT_FAILED_TO_RETRIEVE, VAULT_FIELDS_REQUIRED, VAULT_INVALID_AES_KEY, VAULT_INVALID_AES_KEY_LENGTH, VAULT_LIMIT_EXCEEDED, VAULT_MAX_CREDENTIALS_NOT_INTEGER } from "@/config/response";
 import { err_route } from "@/config/shorthand";
 import { NextResponse } from "next/server";
 import { randomBytes } from 'crypto';
 import forge from 'node-forge'
 import { PrismaClient } from "@prisma/client";
+import { SessionData, SESSION_OPTIONS } from "@/config/session";
+import { getIronSession } from "iron-session";
+import { cookies } from "next/headers";
 
 export async function POST(request: Request, response: Response) {
+    const session = await getIronSession<SessionData>(cookies(), SESSION_OPTIONS)
+    if (Object.keys(session).length === 0)
+        return err_route(LOGIN_REQUIRED.status,
+            LOGIN_REQUIRED.msg,
+            LOGIN_REQUIRED.code)
     const prisma = new PrismaClient()
     try {
+        const vaults = await prisma.vault.findMany();
+        if (vaults.length > VAULT_LIMIT) {
+            return err_route(VAULT_LIMIT_EXCEEDED.status,
+                VAULT_LIMIT_EXCEEDED.msg,
+                VAULT_LIMIT_EXCEEDED.code)
+        } 
         const formData = await request.formData()
         const name = formData.get('name') as string
         const maxCredentials = parseInt(formData.get('maxCredentials') as string)
@@ -40,10 +54,10 @@ export async function POST(request: Request, response: Response) {
             await prisma.vault.create({
                 data: {
                     name: name,
-                    maxCredentials: maxCredentials,
-                    credentials: {}
+                    maxCredentials: maxCredentials
                 },
             });
+            prisma.$disconnect()
             return new NextResponse(Buffer.from(generatedKey).toString('base64'), { status: 200, headers })
         } else {
             const fileName = keyFile.name
@@ -76,9 +90,9 @@ export async function POST(request: Request, response: Response) {
                     data: {
                         name: name,
                         maxCredentials: maxCredentials,
-                        credentials: {}
                     },
                 });
+                prisma.$disconnect()
                 return new NextResponse("REDACTED", { status: 200 })
             } else {
                 return err_route(VAULT_INVALID_AES_KEY.status,
@@ -91,5 +105,30 @@ export async function POST(request: Request, response: Response) {
         return err_route(VAULT_FIELDS_REQUIRED.status,
             VAULT_FIELDS_REQUIRED.msg,
             VAULT_FIELDS_REQUIRED.code)
+    }
+}
+
+export async function GET(request: Request) {
+    const session = await getIronSession<SessionData>(cookies(), SESSION_OPTIONS)
+    if (Object.keys(session).length === 0)
+        return err_route(LOGIN_REQUIRED.status,
+            LOGIN_REQUIRED.msg,
+            LOGIN_REQUIRED.code)
+    const prisma = new PrismaClient()
+    try {
+        const vaults = await prisma.vault.findMany({
+            select: {
+                id: true,
+                name: true,
+                maxCredentials: true
+            }
+        })
+        return NextResponse.json(vaults)
+    } catch (error) {
+        return err_route(VAULT_FAILED_TO_RETRIEVE.status,
+            VAULT_FAILED_TO_RETRIEVE.msg,
+            VAULT_FAILED_TO_RETRIEVE.code)
+    } finally {
+        await prisma.$disconnect()
     }
 }
