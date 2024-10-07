@@ -61,7 +61,6 @@ export async function POST(request: Request, response: Response) {
                     VAULT_INVALID_AES_KEY_LENGTH.code)
             }
             aesKey = keyBuffer.toString('hex')
-
             const iv = forge.random.getBytesSync(16)
             const cipher = forge.cipher.createCipher('AES-CBC', forge.util.hexToBytes(aesKey))
             cipher.start({ iv })
