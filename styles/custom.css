@@ -18,12 +18,16 @@ nav .brand {
     user-select: none;
     transition: font-size 0.3s ease;
     margin-right: var(--nav-initial-gap);
+    display: flex;
+    align-items: center;
+    gap: 11px;
 }
 
 @media (max-width: 600px) {
     nav .brand {
         font-size: 1.25rem;
         margin-right: 0;
+        flex-direction: column;
     }
 }
 
@@ -32,6 +36,15 @@ nav .brand {
    ======================================= */
 nav .link {
     font-size: 1rem;
+}
+
+/* =======================================
+   Navbar Currentl Vault Name
+   ======================================= */
+nav .vault-name {
+    font-size: 0.8rem;
+    background: #121212;
+    padding: 2px;
 }
 
 /* =======================================

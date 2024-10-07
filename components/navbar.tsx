@@ -17,7 +17,10 @@ interface NavbarBrandProps {
 
 const NavbarBrand: React.FC<NavbarBrandProps> = ({ name, href }) => {
     return (
-        <div className="brand"><a href={href}>{name}</a></div>
+        <div className="brand">
+            <a href={href}>{name}</a>
+           {/* <div className="vault-name">550e8400-e29b-41d4-a716-446655440000</div> */}
+        </div>
     );
 };
 

@@ -22,14 +22,7 @@ export default function Test() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <div className="key-reveal">
-          <Alert
-            type={"success"}
-            code={alertMessage}
-            message={message}
-            onClick={() => handleCopy(message)}
-          />
-        </div>
+        sddsadsads
       </main>
     </div>
   );
