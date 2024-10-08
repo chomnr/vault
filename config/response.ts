@@ -118,7 +118,7 @@ export const VAULT_ID_INVALID_LENGTH: ResponseError = {
 
 export const VAULT_NOT_SELECTED_OR_DECRYPTED: ResponseError = {
     status: 400,
-    msg: "You must have a vault selected and not decrypted to obtain information about it through this api.",
+    msg: "You must have a vault selected and not decrypted to obtain information about it through this api. Use api/vaults/info instead.",
     code: "ERR_VAULT_NOT_SELECTED_OR_DECRYPTED"
 }
 
@@ -150,4 +150,10 @@ export const VAULT_DECRYPTION_EMPTY_KEY: ResponseError = {
     status: 400,
     msg: "Decryption failed: The provided key is empty. Please provide a valid AES 256 encryption key and try again.",
     code: "ERR_VAULT_DECRYPTION_EMPTY_KEY"
+};
+
+export const VAULT_NOT_SELECTED_OR_NOT_DECRYPTED: ResponseError = {
+    status: 400,
+    msg: "You must have a vault selected and decrypted to obtain information through this API. Use api/vaults/selected to retrieve information.",
+    code: "ERR_VAULT_NOT_SELECTED_OR_NOT_DECRYPTED"
 };
