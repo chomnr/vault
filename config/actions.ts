@@ -183,3 +183,41 @@ export async function deleteVault(prevState: { result: { error: any; code: any; 
         }
     };
 }
+
+export async function createCredential(prevState: { result: { error: any; code: any; timestamp: any; } }, form: FormData) {
+    const { type, name, data } = {
+        type: form.get('type') as string,
+        name: form.get('name') as string,
+        data: form.get('data') as string,
+    };
+    const response = await fetch(HOST_URL + "/api/credentials", {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 
+            'Content-Type': 'application/json',
+            "Cookie": headers().get("cookie") as string
+        },
+        body: JSON.stringify({ type, name, data }),
+    });
+    if (!response.ok) {
+        const result = await response.json();
+        return {
+            result: {
+                error: result.error,
+                code: result.code,
+                timestamp: result.timestamp || new Date().toISOString(),
+                data: null,
+            },
+        };
+    }
+
+    redirect("/vault")
+    return {
+        result: {
+            error: null,
+            code: null,
+            timestamp: new Date().toISOString(),
+            data: null,
+        },
+    };
+}

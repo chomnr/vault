@@ -40,13 +40,14 @@ export async function POST(request: Request) {
                 CREDENTIAL_DATA_PARSE_ERROR.msg,
                 CREDENTIAL_DATA_PARSE_ERROR.code)
         }
-        const aesKey = session.vault.key
-        const iv = forge.random.getBytesSync(16)
-        const cipher = forge.cipher.createCipher('AES-CBC', forge.util.hexToBytes(aesKey))
-        cipher.start({ iv: forge.util.hexToBytes(iv) })
-        cipher.update(forge.util.createBuffer(JSON.stringify(data)))
+        const aesKey = session.vault.key;
+        const iv = forge.random.getBytesSync(16);
+        const cipher = forge.cipher.createCipher('AES-CBC', forge.util.hexToBytes(aesKey));
+        cipher.start({ iv: iv });
+        cipher.update(forge.util.createBuffer(JSON.stringify(data)));
         cipher.finish();
-        const encryptedData = forge.util.encode64(cipher.output.getBytes())
+        const encryptedData = forge.util.encode64(cipher.output.getBytes());
+        const base64IV = forge.util.encode64(iv);
         const credentials = await prisma.vault.update({
             where: {
                 id: session.vault.id
@@ -57,14 +58,15 @@ export async function POST(request: Request) {
                         type: type,
                         name: name,
                         data: encryptedData,
-                        iv: forge.util.encode64(iv) ,
-                        updatedAt: ""
+                        iv: base64IV,
+                        updatedAt: new Date().toISOString()
                     }
                 }
             }
         });
         return NextResponse.json(credentials);
     } catch (error) {
+        console.log(error);
         return err_route(VAULT_FAILED_TO_RETRIEVE.status,
             VAULT_FAILED_TO_RETRIEVE.msg,
             VAULT_FAILED_TO_RETRIEVE.code);

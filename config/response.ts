@@ -88,7 +88,7 @@ export const VAULT_INVALID_AES_KEY_LENGTH: ResponseError = {
 
 export const VAULT_FAILED_TO_RETRIEVE: ResponseError = {
     status: 500,
-    msg: "Failed to retrieve vaults. Please try again later.",
+    msg: "Failed to retrieve vault. Please try again later.",
     code: "ERR_FAILED_TO_RETRIEVE_VAULTS"
 }
 
