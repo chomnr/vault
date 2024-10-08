@@ -372,6 +372,15 @@ form.key-upload .submit:hover {
     font-size: 0.7rem;
 }
 
+
+/* =======================================
+   Loading
+   ======================================= */
+.loading {
+    position: absolute;
+    background-color: (var(--background));
+}
+
 /* =======================================
    Misc
    =======================================  */
