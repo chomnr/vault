@@ -26,6 +26,10 @@ export async function middleware(request: NextRequest) {
             session.vault = undefined
             await session.save()
         }
+
+        if (request.nextUrl.pathname === "/vault/delete" && session.vault?.key === undefined) {
+            return NextResponse.redirect(new URL('/', request.url))
+        }
     }
     return result
 }
