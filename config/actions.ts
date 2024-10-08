@@ -6,6 +6,7 @@ import { newSession, SESSION_OPTIONS, SessionData } from './session';
 import { getIronSession } from 'iron-session';
 import { cookies, headers } from 'next/headers';
 import { VAULT_DECRYPTION_EMPTY_KEY } from './response';
+import { request } from 'http';
 
 export async function isAuthenticated() {
     const session = await getIronSession<SessionData>(cookies(), SESSION_OPTIONS)
@@ -110,6 +111,32 @@ export async function decryptVault(prevState: { result: { error: any; code: any;
                 data: null
             }
         };
+    }
+    const setCookieHeader = response.headers.get('set-cookie');
+    if (setCookieHeader) {
+        const cookieParts = setCookieHeader.split(';');
+        const [nameValue] = cookieParts[0].split('=');
+        const cookieName = nameValue.trim(); 
+        const cookieValue = cookieParts[0].split('=')[1].trim();
+        let maxAge: number | undefined;
+
+        for (const part of cookieParts) {
+            const [key, val] = part.trim().split('=');
+            if (key.toLowerCase() === 'max-age') {
+                maxAge = parseInt(val, 10);
+                break;
+            } else if (key.toLowerCase() === 'expires') {
+                const expiresDate = new Date(val);
+                maxAge = Math.floor((expiresDate.getTime() - Date.now()) / 1000); // Convert to seconds
+                break;
+            }
+        }
+        cookies().set({
+            name: cookieName,
+            value: cookieValue,
+            path: '/',
+            maxAge: maxAge !== undefined ? maxAge : 60 * 60 * 24 * 30,
+        });
     }
     return {
         result: {
