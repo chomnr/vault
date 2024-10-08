@@ -20,7 +20,6 @@ export interface SessionCurrentCredential {
     id: string | undefined,
 }
 
-
 export const SESSION_OPTIONS: SessionOptions = {
     password: COOKIE_SECRET,
     cookieName: COOKIE_NAME,
