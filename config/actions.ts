@@ -138,6 +138,8 @@ export async function decryptVault(prevState: { result: { error: any; code: any;
             maxAge: maxAge !== undefined ? maxAge : 60 * 60 * 24 * 30,
         });
     }
+
+    redirect("/vault")
     return {
         result: {
             error: null,
