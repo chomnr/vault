@@ -349,6 +349,28 @@ form.key-upload .submit:hover {
 }
 
 /* =======================================
+   Vault Creation
+   =======================================  */
+.vault.unlocked {
+    max-width: 500px;
+}
+
+.vault.unlocked h1 {
+    font-size: 1.3rem;
+    user-select: none;
+}
+
+.vault.unlocked h2 {
+    font-size: 0.8rem;
+    user-select: none;
+}
+
+.vault.unlocked p {
+    font-size: 0.7rem;
+    user-select: none;
+}
+
+/* =======================================
    Key Reveal
    ======================================= */
 .key-reveal {
