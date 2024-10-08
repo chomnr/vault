@@ -349,7 +349,29 @@ form.key-upload .submit:hover {
 }
 
 /* =======================================
-   Vault Creation
+   Vault Deletion
+   =======================================  */
+.vault.deletion {
+    max-width: 500px;
+}
+
+.vault.deletion h1 {
+    font-size: 1.3rem;
+    user-select: none;
+}
+
+.vault.deletion h2 {
+    font-size: 0.8rem;
+    user-select: none;
+}
+
+.vault.deletion p {
+    font-size: 0.7rem;
+    user-select: none;
+}
+
+/* =======================================
+   Vault Unlocked
    =======================================  */
 .vault.unlocked {
     max-width: 500px;
