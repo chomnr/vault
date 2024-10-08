@@ -6,7 +6,6 @@ import { getIronSession } from "iron-session";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-// returns results when it is decrypted.
 export async function POST(request: Request, response: Response) {
     const session = await getIronSession<SessionData>(cookies(), SESSION_OPTIONS)
     if (Object.keys(session).length === 0)
