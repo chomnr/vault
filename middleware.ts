@@ -17,7 +17,7 @@ export async function middleware(request: NextRequest) {
         if (request.nextUrl.pathname === '/login' || request.nextUrl.pathname === '/api/login') {
             return NextResponse.redirect(new URL('/', request.url))
         }
-
+        
         if (request.nextUrl.pathname === "/vault/decrypt" && session.vault === undefined) {
             return NextResponse.redirect(new URL('/', request.url))
         }
@@ -27,7 +27,7 @@ export async function middleware(request: NextRequest) {
             await session.save()
         }
 
-        if (request.nextUrl.pathname === "/vault/credential/create" && session.vault !== undefined && session.vault.key !== undefined) {
+        if (request.nextUrl.pathname === "/vault/credential/create" && session.vault?.key === undefined) {
             return NextResponse.redirect(new URL('/', request.url))
         }
 
