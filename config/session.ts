@@ -1,7 +1,6 @@
 import { getIronSession, SessionOptions } from "iron-session";
 import { COOKIE_MAX_AGE, COOKIE_NAME, COOKIE_SECRET, NODE_ENV } from "./general";
 import { cookies } from "next/headers";
-import { Vault } from "@prisma/client";
 
 export interface SessionData {
     timeStamp: number,
