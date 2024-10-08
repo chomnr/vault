@@ -17,7 +17,6 @@ export async function POST(request: Request, response: Response) {
         const data = await request.json()
         const { confirmation } = data
         if (session.vault === undefined || session.vault.key === undefined) {
-            console.log('hello')
             return err_route(VAULT_NOT_SELECTED_OR_NOT_DECRYPTED.status,
                 VAULT_NOT_SELECTED_OR_NOT_DECRYPTED.msg,
                 VAULT_NOT_SELECTED_OR_NOT_DECRYPTED.code
@@ -38,7 +37,6 @@ export async function POST(request: Request, response: Response) {
             status: 200
         });
     } catch (er) {
-        console.log("dsadas")
         console.log(er)
         return err_route(VAULT_NOT_FOUND.status,
             VAULT_NOT_FOUND.msg,
