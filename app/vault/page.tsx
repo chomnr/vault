@@ -69,8 +69,8 @@ export default function Home() {
                     <div className="name">discord info for account main acc</div>
                   </div>
                   <div className="actions">
-                    <a href="/vault/edit"><Edit size={8} /></a>
-                    <a href="/vault/delete"><Trashcan size={8} /></a>
+                    <a href="/vault/credential/edit"><Edit size={8} /></a>
+                    <a href="/vault/credential/delete"><Trashcan size={8} /></a>
                   </div>
                 </div>
                 <div className="credential">

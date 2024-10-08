@@ -107,7 +107,7 @@ export default function Home() {
                             </div>
                             <div className="flex-box col" style={{ gap: '7px' }}>
                                 <h2>Vault Name</h2>
-                                <p>The name you would like your vault to be</p>
+                                <p>The name you would like your vault to be.</p>
                                 <Input name="name" type="text" placeholder="Name" />
                                 <h2>Maximum Credentials</h2>
                                 <p>This vault can store a maximum of VAULT_CREDENTIAL_LIMIT credentials.</p>
