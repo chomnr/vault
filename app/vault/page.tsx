@@ -59,7 +59,7 @@ export default function Home() {
               <div className="flex-box col" style={{ gap: '7px' }}>
                 <br />
                 <p>The vault is now decrypted, and you can access your stored credentials. However, each one is still encrypted individually. You'll need to decrypt them manually. You must search by the credential's type in order to locate your desired credential.</p>
-                <p>If you would like to decrypt a credential click the <Locked size={10}/> to decrypt it.</p>
+                <p>If you would like to decrypt a credential just click on it.</p>
               </div>
               <Input type="search" placeholder="Search for credentials" />
               <div className="credentials">
@@ -69,7 +69,6 @@ export default function Home() {
                     <div className="name">discord info for account main acc</div>
                   </div>
                   <div className="actions">
-                    <a href="/.."><Locked size={8}/></a>
                     <a href="/vault/edit"><Edit size={8} /></a>
                     <a href="/vault/delete"><Trashcan size={8} /></a>
                   </div>
@@ -79,7 +78,6 @@ export default function Home() {
                     GOOGLE
                   </div>
                   <div className="actions">
-                    <a href="/.."><Locked size={8}/></a>
                     <a href="/vault/edit"><Edit size={8} /></a>
                     <a href="/vault/delete"><Trashcan size={8}/></a>
                   </div>
