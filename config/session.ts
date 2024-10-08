@@ -6,7 +6,10 @@ import { Vault } from "@prisma/client";
 export interface SessionData {
     timeStamp: number,
     vault: SessionVault | undefined,
-    remember: boolean
+    remember: boolean,
+    credential: {
+        current: string
+    }
 }
 
 export interface SessionVault {
