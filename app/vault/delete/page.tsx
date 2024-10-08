@@ -72,7 +72,7 @@ export default function Home() {
                         <form className="flex-box row" action={formAction}>
                             <div className="flex-box col" style={{ gap: '7px' }}>
                                 <p>Are you sure you want to delete this vault? Once deleted, all associated credentials and data within the vault will be permanently removed and cannot be recovered. This action cannot be undone. Please ensure you have backed up any important information before proceeding.</p>
-                                <h2>Please type <i style={{color: "#1976D2"}}>{vault?.name}</i> to confirm</h2>
+                                <h2>Please type <span style={{color: "#1976D2"}}>{vault?.name}</span> to confirm</h2>
                                 <input
                                     placeholder="Vault Name"
                                     type="text"
