@@ -84,7 +84,7 @@ export default function Home() {
                         <div className="divider" style={{ marginTop: '11px', marginBottom: '11px' }}></div>
                         <div className="actions" style={{ display: "flex", gap: '5px' }}>
                             <button type="submit" onClick={handleDelete}>Delete</button>
-                            <button onClick={() => { window.location.href = "/" }}>Cancel</button>
+                            <button onClick={() => { window.location.href = "/vault" }}>Cancel</button>
                         </div>
                     </div>
                 )}
