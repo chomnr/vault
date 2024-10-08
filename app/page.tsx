@@ -144,22 +144,3 @@ export default function Home() {
     </div>
   );
 }
-
-{/*
-          <div className="vaults">
-            <div className="vault">
-              <div className="inner">
-                <div className="icon">1</div>
-              </div>
-            </div>
-            <form className="vault-settings">
-              <input type="file" className="upload" />
-              <button type="submit">Enter</button>
-              <button type="submit" onClick={() => setShowVaultProceed(false)}>Back</button>
-            </form>
-          </div>
-          */}
-
-function setMaxCredentials(arg0: string | number) {
-  throw new Error("Function not implemented.");
-}
