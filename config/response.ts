@@ -43,7 +43,7 @@ export const LOGIN_EXPIRED: ResponseError = {
 /* =======================================
    VAULT ERROR
    ======================================= */
-   
+
 export const VAULT_BAD_NAME: ResponseError = {
     status: 400,
     msg: `The vault name must be between ${VAULT_NAME_MIN_LENGTH} and ${VAULT_NAME_MAX_LENGTH} characters long`,
@@ -168,4 +168,32 @@ export const VAULT_NOT_DECRYPTED: ResponseError = {
     status: 403,
     msg: "The vault must be decrypted to proceed. Please decrypt the vault and try again.",
     code: "ERR_VAULT_NOT_DECRYPTED"
+};
+
+
+/* =======================================
+   CREDENTIAL ERROR
+   ======================================= */
+export const CREDENTIAL_TYPE_EMPTY: ResponseError = {
+    status: 400,
+    msg: "The credential type cannot be empty. Please provide a valid type.",
+    code: "ERR_CREDENTIAL_TYPE_EMPTY"
+};
+
+export const CREDENTIAL_NAME_EMPTY: ResponseError = {
+    status: 400,
+    msg: "The credential name cannot be empty. Please provide a valid name.",
+    code: "ERR_CREDENTIAL_NAME_EMPTY"
+};
+
+export const CREDENTIAL_DATA_EMPTY: ResponseError = {
+    status: 400,
+    msg: "The credential data cannot be empty. Please provide valid JSON data.",
+    code: "ERR_CREDENTIAL_DATA_EMPTY"
+};
+
+export const CREDENTIAL_DATA_PARSE_ERROR: ResponseError = {
+    status: 400,
+    msg: "The credential data could not be parsed. Please ensure it is valid JSON format.",
+    code: "ERR_CREDENTIAL_DATA_PARSE_ERROR"
 };
