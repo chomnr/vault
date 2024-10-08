@@ -26,6 +26,7 @@ model Vault {
 type Credential {
   type        String
   name        String
+  iv          String
   data        Json
   createdAt   DateTime @default(now())
   updatedAt   DateTime
