@@ -51,6 +51,68 @@ export const Trashcan: React.FC<IconSvgProps> = ({
   </svg>
 );
 
+export const Edit: React.FC<IconSvgProps> = ({
+  size = 42,
+  width = size,
+  height = size,
+  ...props
+}) => (
+  <svg
+    clipRule="evenodd"
+    fillRule="evenodd"
+    strokeLinejoin="round"
+    strokeMiterlimit="2"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    fill="#ffffff" // Set fill color to white
+    {...props}
+  >
+    <path
+      d="m4.481 15.659c-1.334 3.916-1.48 4.232-1.48 4.587 0 .528.46.749.749.749.352 0 .668-.137 4.574-1.492zm1.06-1.061 3.846 3.846 11.321-11.311c.195-.195.293-.45.293-.707 0-.255-.098-.51-.293-.706-.692-.691-1.742-1.74-2.435-2.432-.195-.195-.451-.293-.707-.293-.254 0-.51.098-.706.293z"
+      fillRule="nonzero"
+    />
+  </svg>
+);
+
+export const Locked: React.FC<IconSvgProps> = ({
+  size = 42,
+  width = size,
+  height = size,
+  ...props
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    viewBox="0 0 24 24"
+    fill="#ffffff"
+    {...props}
+  >
+    <path d="M18 10v-4c0-3.313-2.687-6-6-6s-6 2.687-6 6v4h-3v14h18v-14h-3zm-10 0v-4c0-2.206 1.794-4 4-4s4 1.794 4 4v4h-8z"/>
+  </svg>
+);
+
+export const Unlocked: React.FC<IconSvgProps> = ({
+  size = 42,
+  width = size,
+  height = size,
+  ...props
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    viewBox="0 0 24 24"
+    fill="#ffffff"
+    {...props}
+  >
+    <path d="M8 10v-4c0-2.206 1.794-4 4-4 2.205 0 4 1.794 4 4v1h2v-1c0-3.313-2.687-6-6-6s-6 2.687-6 6v4h-3v14h18v-14h-13z"/>
+  </svg>
+);
+
+
 export const DiscordIcon: React.FC<IconSvgProps> = ({
   size = 24,
   width,

@@ -392,6 +392,42 @@ form.key-upload .submit:hover {
     user-select: none;
 }
 
+.vault.unlocked .credentials {
+    display: flex;
+    min-height: 250px;
+    max-height: 250px;
+    word-break: break-all;
+    overflow-y: scroll;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.vault.unlocked .credential {
+    display: flex;
+    padding: 3px;
+    background-color: #101010;
+    max-height: 23px;
+    width: 100%;
+    font-size: 0.8rem;
+    cursor: pointer;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.vault.unlocked .credential .info {
+    display: flex;
+    gap: 7px;
+    font-size: 0.7rem;
+    align-items: center;
+}
+
+
+.vault.unlocked .credential .actions {
+    display: flex;
+    gap: 7px;
+}
+
 /* =======================================
    Key Reveal
    ======================================= */
@@ -415,7 +451,6 @@ form.key-upload .submit:hover {
     font-family: var(--font-mono);
     font-size: 0.7rem;
 }
-
 
 /* =======================================
    Loading

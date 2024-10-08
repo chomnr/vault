@@ -7,7 +7,7 @@ import { useFormState } from "react-dom";
 import { Alert } from "@/components/alert";
 import React from "react";
 import { Input } from "@/components/input";
-import { Trashcan } from "@/components/icons";
+import { Edit, Locked, Trashcan } from "@/components/icons";
 
 const initialState = {
   result: {
@@ -53,15 +53,27 @@ export default function Home() {
           </div>
         ) : (
           <div className="vault unlocked">
-            <h1>Vault <a href="/vault/delete"><Trashcan size={13}/></a></h1>
+            <h1>Vault <a href="/vault/delete"><Trashcan size={13} /></a></h1>
             <div className="divider"></div>
             <div className="flex-box col" style={{ gap: '7px' }}>
               <div className="flex-box col" style={{ gap: '7px' }}>
                 <br />
-                <p>The vault has been successfully decrypted! You may now look through your credentials.</p>
+                <p>The vault is now decrypted, and you can access your stored credentials. However, each one is still encrypted individually. You'll need to decrypt them manually. You must search by the credential's type in order to locate your desired credential.</p>
+                <p>If you would like to decrypt a credential click the <Locked size={10}/> to decrypt it.</p>
               </div>
               <Input type="search" placeholder="Search for credentials" />
-              adssdads
+              <div className="credentials">
+                <div className="credential">
+                  <div className="info">
+                    DISCORD
+                  </div>
+                  <div className="actions">
+                    <a href="/.."><Locked size={10}/></a>
+                    <a href="/vault/edit"><Edit size={10} /></a>
+                    <a href="/vault/delete"><Trashcan size={10} /></a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}
