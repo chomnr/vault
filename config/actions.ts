@@ -148,3 +148,38 @@ export async function decryptVault(prevState: { result: { error: any; code: any;
         }
     };
 }
+
+export async function deleteVault(prevState: { result: { error: any; code: any; timestamp: any; } }, form: FormData) {
+    const { confirmation } = {
+        confirmation: form.get('confirmation') as string,
+    };
+    const response = await fetch(HOST_URL + "/api/vaults/delete", {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 
+            'Content-Type': 'application/json',
+            "Cookie": headers().get("cookie") as string
+        },
+        body: JSON.stringify({ confirmation }),
+    });
+    if (!response.ok) {
+        const result = await response.json();
+        return {
+            result: {
+                error: result.error,
+                code: result.code,
+                timestamp: result.timestamp || new Date().toISOString(),
+                data: null
+            }
+        };
+    }
+    redirect("/")
+    return {
+        result: {
+            error: null,
+            code: null,
+            timestamp: new Date().toISOString(),
+            data: ""
+        }
+    };
+}

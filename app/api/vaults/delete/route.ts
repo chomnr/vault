@@ -1,6 +1,7 @@
-import { LOGIN_REQUIRED, VAULT_DECRYPTION_EMPTY_KEY, VAULT_LINKING_ERROR, VAULT_NOT_FOUND, VAULT_NOT_SELECTED_OR_DECRYPTED, VAULT_NOT_SELECTED_OR_NOT_DECRYPTED } from "@/config/response";
+import { LOGIN_REQUIRED, VAULT_NAME_INVALID, VAULT_NOT_FOUND, VAULT_NOT_SELECTED_OR_DECRYPTED, VAULT_NOT_SELECTED_OR_NOT_DECRYPTED } from "@/config/response";
 import { SessionData, SESSION_OPTIONS } from "@/config/session";
 import { err_route } from "@/config/shorthand";
+import { PrismaClient } from "@prisma/client";
 import { getIronSession } from "iron-session";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
@@ -12,20 +13,33 @@ export async function POST(request: Request, response: Response) {
         return err_route(LOGIN_REQUIRED.status,
             LOGIN_REQUIRED.msg,
             LOGIN_REQUIRED.code)
+    const prisma = new PrismaClient();
     try {
+        const data = await request.json()
+        const { confirmation } = data
         if (session.vault === undefined || session.vault.key === undefined) {
+            console.log('hello')
             return err_route(VAULT_NOT_SELECTED_OR_NOT_DECRYPTED.status,
                 VAULT_NOT_SELECTED_OR_NOT_DECRYPTED.msg,
                 VAULT_NOT_SELECTED_OR_NOT_DECRYPTED.code
             )
         }
-        
-        return NextResponse.json({
-            id: session.vault.id,
-            name: session.vault.name,
-            key: session.vault.key
+        if (confirmation !== session.vault.name) {
+            return err_route(VAULT_NAME_INVALID.status,
+                VAULT_NAME_INVALID.msg,
+                VAULT_NAME_INVALID.code
+            )
+        }
+        await prisma.vault.delete({
+            where: {
+                id: session.vault.id
+            }
+        })
+        return NextResponse.json(null, {
+            status: 200
         });
     } catch (er) {
+        console.log("dsadas")
         console.log(er)
         return err_route(VAULT_NOT_FOUND.status,
             VAULT_NOT_FOUND.msg,

@@ -157,3 +157,9 @@ export const VAULT_NOT_SELECTED_OR_NOT_DECRYPTED: ResponseError = {
     msg: "You must have a vault selected and decrypted to obtain information through this API. Use api/vaults/selected to retrieve information.",
     code: "ERR_VAULT_NOT_SELECTED_OR_NOT_DECRYPTED"
 };
+
+export const VAULT_NAME_INVALID: ResponseError = {
+    status: 400,
+    msg: "The vault name you entered is invalid. Please check the spelling and try again. Ensure that the vault exists and that you have access to it.",
+    code: "ERR_VAULT_NAME_INVALID"
+};
