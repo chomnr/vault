@@ -7,6 +7,7 @@ import { useFormState } from "react-dom";
 import { Alert } from "@/components/alert";
 import React from "react";
 import { Input } from "@/components/input";
+import { Trashcan } from "@/components/icons";
 
 const initialState = {
   result: {
@@ -52,15 +53,15 @@ export default function Home() {
           </div>
         ) : (
           <div className="vault unlocked">
-            <h1>Vault</h1>
-            <div className="divider" style={{ marginBottom: '7px' }}></div>
-            <h2>Vault Name: {vault?.name} </h2>
+            <h1>Vault <a href="/vault/delete"><Trashcan size={13}/></a></h1>
+            <div className="divider"></div>
             <div className="flex-box col" style={{ gap: '7px' }}>
               <div className="flex-box col" style={{ gap: '7px' }}>
                 <br />
-                <p>To access this vault, you must upload the AES 256 encryption key that is bound to it. This key is required to view the vault's contents. Once inside the vault, each value must be manually decrypted using the provided key.</p>
+                <p>The vault has been successfully decrypted! You may now look through your credentials.</p>
               </div>
               <Input type="search" placeholder="Search for credentials" />
+              adssdads
             </div>
           </div>
         )}
