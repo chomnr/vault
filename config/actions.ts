@@ -5,7 +5,7 @@ import { COOKIE_MAX_AGE, HOST_URL } from './general'
 import { newSession, SESSION_OPTIONS, SessionData } from './session';
 import { getIronSession } from 'iron-session';
 import { cookies, headers } from 'next/headers';
-import { LOGIN_REQUIRED } from './response';
+import { VAULT_DECRYPTION_EMPTY_KEY } from './response';
 
 export async function isAuthenticated() {
     const session = await getIronSession<SessionData>(cookies(), SESSION_OPTIONS)
@@ -90,7 +90,12 @@ export async function decryptVault(prevState: { result: { error: any; code: any;
             if ((value as File).size > 0) {
                 formData.append(key, value);
             } else {
-                throw new Error("Key file must not be empty.");
+                result: {
+                    error: VAULT_DECRYPTION_EMPTY_KEY.msg;
+                    code: VAULT_DECRYPTION_EMPTY_KEY.code;
+                    timestamp: new Date().toISOString();
+                    data: null;
+                }
             }
         }
     });

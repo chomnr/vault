@@ -145,3 +145,9 @@ export const VAULT_ENCRYPTION_FAILED: ResponseError = {
     msg: "Encryption of the vault has failed. Please check your input and try again.",
     code: "ERR_VAULT_ENCRYPTION_FAILED"
 };
+
+export const VAULT_DECRYPTION_EMPTY_KEY: ResponseError = {
+    status: 400,
+    msg: "Decryption failed: The provided key is empty. Please provide a valid AES 256 encryption key and try again.",
+    code: "ERR_VAULT_DECRYPTION_EMPTY_KEY"
+};
