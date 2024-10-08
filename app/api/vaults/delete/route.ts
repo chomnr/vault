@@ -1,4 +1,4 @@
-import { LOGIN_REQUIRED, VAULT_NAME_INVALID, VAULT_NOT_FOUND, VAULT_NOT_SELECTED_OR_DECRYPTED, VAULT_NOT_SELECTED_OR_NOT_DECRYPTED } from "@/config/response";
+import { LOGIN_REQUIRED, VAULT_NAME_INVALID, VAULT_NOT_DECRYPTED, VAULT_NOT_FOUND, VAULT_NOT_SELECTED_OR_DECRYPTED, VAULT_NOT_SELECTED_OR_NOT_DECRYPTED } from "@/config/response";
 import { SessionData, SESSION_OPTIONS } from "@/config/session";
 import { err_route } from "@/config/shorthand";
 import { PrismaClient } from "@prisma/client";
@@ -12,6 +12,10 @@ export async function POST(request: Request, response: Response) {
         return err_route(LOGIN_REQUIRED.status,
             LOGIN_REQUIRED.msg,
             LOGIN_REQUIRED.code)
+    if (session.vault?.key === undefined)
+        return err_route(VAULT_NOT_DECRYPTED.status,
+            VAULT_NOT_DECRYPTED.msg,
+            VAULT_NOT_DECRYPTED.code)
     const prisma = new PrismaClient();
     try {
         const data = await request.json()

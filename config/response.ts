@@ -163,3 +163,9 @@ export const VAULT_NAME_INVALID: ResponseError = {
     msg: "The vault name you entered is invalid. Please check the spelling and try again. Ensure that the vault exists and that you have access to it.",
     code: "ERR_VAULT_NAME_INVALID"
 };
+
+export const VAULT_NOT_DECRYPTED: ResponseError = {
+    status: 403,
+    msg: "The vault must be decrypted to proceed. Please decrypt the vault and try again.",
+    code: "ERR_VAULT_NOT_DECRYPTED"
+};
