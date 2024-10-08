@@ -89,13 +89,6 @@ export async function decryptVault(prevState: { result: { error: any; code: any;
         if (key === 'key-upload') {
             if ((value as File).size > 0) {
                 formData.append(key, value);
-            } else {
-                result: {
-                    error: VAULT_DECRYPTION_EMPTY_KEY.msg;
-                    code: VAULT_DECRYPTION_EMPTY_KEY.code;
-                    timestamp: new Date().toISOString();
-                    data: null;
-                }
             }
         }
     });
