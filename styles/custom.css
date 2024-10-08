@@ -399,13 +399,12 @@ form.key-upload .submit:hover {
     word-break: break-all;
     overflow-y: scroll;
     flex-direction: column;
-    gap: 3px;
+    gap: 2px;
 }
 
 .vault.unlocked .credential {
     display: flex;
-    padding: 3px;
-    background-color: #101010;
+    background-color: #0E0E0E;
     max-height: 23px;
     width: 100%;
     font-size: 0.8rem;
@@ -420,12 +419,29 @@ form.key-upload .submit:hover {
     gap: 7px;
     font-size: 0.7rem;
     align-items: center;
+    padding: 3px;
+    font-weight: bold;
+    color: ghostwhite;
 }
 
+
+.vault.unlocked .credential .info .type {
+    max-width: 50px;
+
+}
+
+.vault.unlocked .credential .info .name {
+    font-size: 0.6rem;
+    max-width: 200px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
 
 .vault.unlocked .credential .actions {
     display: flex;
     gap: 7px;
+    padding: 3px;
 }
 
 /* =======================================

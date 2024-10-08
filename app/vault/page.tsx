@@ -65,12 +65,23 @@ export default function Home() {
               <div className="credentials">
                 <div className="credential">
                   <div className="info">
-                    DISCORD
+                    <div className="type">DISCORD</div>
+                    <div className="name">discord info for account main acc</div>
                   </div>
                   <div className="actions">
-                    <a href="/.."><Locked size={10}/></a>
-                    <a href="/vault/edit"><Edit size={10} /></a>
-                    <a href="/vault/delete"><Trashcan size={10} /></a>
+                    <a href="/.."><Locked size={8}/></a>
+                    <a href="/vault/edit"><Edit size={8} /></a>
+                    <a href="/vault/delete"><Trashcan size={8} /></a>
+                  </div>
+                </div>
+                <div className="credential">
+                  <div className="info">
+                    GOOGLE
+                  </div>
+                  <div className="actions">
+                    <a href="/.."><Locked size={8}/></a>
+                    <a href="/vault/edit"><Edit size={8} /></a>
+                    <a href="/vault/delete"><Trashcan size={8}/></a>
                   </div>
                 </div>
               </div>
