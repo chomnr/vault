@@ -7,9 +7,7 @@ export interface SessionData {
     timeStamp: number,
     vault: SessionVault | undefined,
     remember: boolean,
-    credential: {
-        current: string
-    }
+    credential: SessionCurrentCredential | undefined
 }
 
 export interface SessionVault {
@@ -17,6 +15,11 @@ export interface SessionVault {
     name: string | undefined,
     key: string | undefined
 }
+
+export interface SessionCurrentCredential {
+    id: string | undefined,
+}
+
 
 export const SESSION_OPTIONS: SessionOptions = {
     password: COOKIE_SECRET,
