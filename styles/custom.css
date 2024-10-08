@@ -450,6 +450,32 @@ form.key-upload .submit:hover {
 /* =======================================
    Credential Creation
    =======================================  */
+
+.credential.creation {
+    max-width: 500px;
+}
+
+.credential.creation h1 {
+    font-size: 1.3rem;
+    user-select: none;
+}
+
+.credential.creation h2 {
+    font-size: 0.8rem;
+    user-select: none;
+}
+
+.credential.creation p {
+    font-size: 0.7rem;
+    user-select: none;
+}
+
+.credential.creation .vault {
+    width: 120px;
+    height: 120px;
+    text-align: center;
+}
+
 .credential.creation .vault .inner {
     height: inherit;
     width: inherit;

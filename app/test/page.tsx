@@ -1,13 +1,10 @@
 'use client'
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import styles from "../page.module.css";
-import { decryptVault } from "@/config/actions";
-import { useFormState } from "react-dom";
-import { Alert } from "@/components/alert";
 import React from "react";
 import { Input } from "@/components/input";
-import { Trashcan } from "@/components/icons";
+import { Alert } from "@/components/alert";
 
 const initialState = {
     result: {
@@ -17,29 +14,55 @@ const initialState = {
         data: null
     },
 };
-
 export default function Home() {
-    const [vault, setVault] = useState<{ id: string; name: string } | null>(null);
-    const [loading, setLoading] = useState(true);
+    const [jsonInput, setJsonInput] = useState('');
+    const [jsonError, setJsonError] = useState('');
+
+    const handleJsonInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const input = e.target.value;
+        setJsonInput(input);
+        if (input.length === 0) {
+            return setJsonError('')
+        }
+        try {
+            JSON.parse(input);
+            setJsonError('');
+        } catch (err) {
+            setJsonError(err + "");
+        }
+    };
     return (
         <div className={styles.page}>
             <main className={styles.main}>
-                <div className="vault deletion">
+                <div className="credential creation">
                     <h1>Credential Creation</h1>
                     <div className="divider" style={{ marginBottom: '7px' }}></div>
-                    <form className="flex-box row">
+                    <form className="flex-box row" style={{ gap: '11px' }}>
+                        <div className="vault">
+                            <div className="inner">
+                                <div className="icon">1</div>
+                            </div>
+                        </div>
                         <div className="flex-box col" style={{ gap: '7px' }}>
-                            <p>Are you sure you want to delete this vault? Once deleted, all associated credentials and data within the vault will be permanently removed and cannot be recovered. This action cannot be undone. Please ensure you have backed up any important information before proceeding.</p>
-                            <h2>Credential Type</h2>
-                            <p>Credential Type can be any value. There are no set values for it.</p>
-                            <Input placeholder="Credential Type (Ex: Google, Microsoft, Discord)" type={"text"} />
                             <h2>Credential Name</h2>
                             <p>The name of or description of your credential.</p>
-                            <Input placeholder="Credential Name" type={"text"} />
+                            <Input placeholder="Credential Name" name="credential_name" type={"text"} />
+                            <h2>Credential Type</h2>
+                            <p>Credential Type can be any value.</p>
+                            <Input placeholder="Credential Type (Ex: Google, Microsoft, Discord)" name="credential_type" type={"text"} />
+                            <h2>Credential Value</h2>
+                            <p>The credential value must be in <b>JSON</b> format. You can include as many fields as you like, as long as the size does not exceed 4MB.</p>
+                            {jsonError && <Alert type={"danger"} message={jsonError} code={"JSON_BAD_PARSE"}/>}
+                            <textarea
+                                placeholder="JSON"
+                                value={jsonInput}
+                                onInput={handleJsonInput}
+                                style={{ borderColor: jsonError ? 'red' : 'initial' }}
+                            ></textarea>
                         </div>
                     </form>
                     <div className="divider" style={{ marginTop: '11px', marginBottom: '11px' }}></div>
-                    <div className="actions" style={{display: "flex", gap: '5px'}}>
+                    <div className="actions" style={{ display: "flex", gap: '5px' }}>
                         <button type="button">Save</button>
                         <button onClick={() => { window.location.href = "/" }}>Cancel</button>
                     </div>

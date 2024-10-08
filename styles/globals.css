@@ -107,6 +107,22 @@ input[type="file"] {
   display: none;
 }
 
+textarea {
+  padding: var(--input-padding);
+  background-color: var(--input-background);
+  border: 0;
+  color: var(--input-color);
+}
+
+textarea:focus {
+  outline: 1px solid var(--input-outline);
+}
+
+textarea {
+  min-height: 150px;
+  min-width: inherit;
+  resize: none;
+}
 
 button {
   padding: var(--button-padding);
