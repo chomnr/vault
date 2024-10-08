@@ -7,7 +7,6 @@ export default function Home() {
   const vaultsRef = useRef<HTMLDivElement>(null);
   const [vaults, setVaults] = useState([]);
   const [loading, setLoading] = useState(true);
-
   const fetchVaults = async () => {
     setLoading(true);
     try {
@@ -68,7 +67,10 @@ export default function Home() {
           <div ref={vaultsRef} className="vaults">
             {vaults.length > 0 ? (
               vaults.map((vault, index) => (
-                <div key={vault["id"]} className="vault" onClick={() => handleVaultLink(vault["id"])}>
+                <div key={vault["id"]} className="vault" onClick={() => {
+                  handleVaultLink(vault["id"]);
+                  localStorage.setItem("vaultIncrementId", (index + 1).toString());
+                }}>
                   <div className="inner">
                     <div className="icon">{index + 1}</div>
                   </div>
