@@ -414,6 +414,10 @@ form.key-upload .submit:hover {
     user-select: none;
 }
 
+.vault.unlocked .credential:hover {
+    background-color: #121212;
+}
+
 .vault.unlocked .credential .info {
     display: flex;
     gap: 7px;
@@ -423,7 +427,6 @@ form.key-upload .submit:hover {
     font-weight: bold;
     color: ghostwhite;
 }
-
 
 .vault.unlocked .credential .info .type {
     max-width: 50px;
@@ -442,6 +445,36 @@ form.key-upload .submit:hover {
     display: flex;
     gap: 7px;
     padding: 3px;
+}
+
+/* =======================================
+   Credential Creation
+   =======================================  */
+.credential.creation .vault .inner {
+    height: inherit;
+    width: inherit;
+    background-color: var(--vault-individual-background);
+    border: 1px solid var(--vault-individual-border);
+    transition: width 0.3s ease;
+    transition: height 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    user-select: none;
+}
+
+.credential.creation .vault .inner .icon {
+    font-size: 4.5rem;
+}
+
+.credential.creation .vault .name {
+    font-size: 0.8rem;
+    user-select: none;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    user-select: none;
 }
 
 /* =======================================
