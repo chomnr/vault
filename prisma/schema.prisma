@@ -27,7 +27,7 @@ type Credential {
   type        String
   name        String
   iv          String
-  data        Json
+  data        String // should be formatted like JSON, it's in a string it can be stored encrypted...
   createdAt   DateTime @default(now())
   updatedAt   DateTime
 }
