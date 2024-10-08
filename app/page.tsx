@@ -40,13 +40,15 @@ export default function Home() {
     if (vaults) {
       Array.from(vaults).forEach(vault => {
         vault.addEventListener('mouseover', () => {
-          (vault.children[0].children[0] as HTMLDivElement).style.color = 'var(--vault-individual-hover-color)';
+          if (vault.children[0] !== undefined)
+            (vault.children[0].children[0] as HTMLDivElement).style.color = 'var(--vault-individual-hover-color)';
 
           if (vault.children[1] !== undefined)
             (vault.children[1] as HTMLDivElement).style.color = 'var(--vault-individual-hover-border)';
         });
         vault.addEventListener('mouseout', () => {
-          (vault.children[0].children[0] as HTMLDivElement).style.color = 'var(--vault-individual-color)';
+          if (vault.children[0] !== undefined)
+            (vault.children[0].children[0] as HTMLDivElement).style.color = 'var(--vault-individual-color)';
           if (vault.children[1])
             (vault.children[1] as HTMLDivElement).style.color = 'var(--vault-individual-color)';
         });
@@ -74,7 +76,7 @@ export default function Home() {
                 </div>
               ))
             ) : (
-              <div>No vaults available</div>
+              null
             )}
             <div id="vault_add" className="vault" onClick={() => window.location.href = "/vault/create"}>
               <div className="inner">
