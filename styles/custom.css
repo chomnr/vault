@@ -402,6 +402,13 @@ form.key-upload .submit:hover {
     gap: 2px;
 }
 
+.vault.unlocked .credentials .content {
+    font-size: 0.7rem;
+    max-height: 150px;
+    word-break: break-all;
+    overflow-y: scroll;
+}
+
 .vault.unlocked .credential {
     display: flex;
     background-color: #0E0E0E;
@@ -429,8 +436,10 @@ form.key-upload .submit:hover {
 }
 
 .vault.unlocked .credential .info .type {
-    max-width: 50px;
-
+    max-width: 100px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .vault.unlocked .credential .info .name {
