@@ -39,3 +39,4 @@ export const VAULT_NAME_MIN_LENGTH = 3
 export const VAULT_NAME_MAX_LENGTH = 23
 
 export const VAULT_ID_MIN_LENGTH = 36
+export const CREDENTIAL_ID_MIN_LENGTH = 36

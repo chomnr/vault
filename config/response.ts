@@ -1,4 +1,4 @@
-import { USERNAME_MAX_LENGTH, USERNAME_MIN_LENGTH, VAULT_CREDENTIAL_LIMIT, VAULT_ID_MIN_LENGTH, VAULT_LIMIT, VAULT_NAME_MAX_LENGTH, VAULT_NAME_MIN_LENGTH } from "./general"
+import { CREDENTIAL_ID_MIN_LENGTH, USERNAME_MAX_LENGTH, USERNAME_MIN_LENGTH, VAULT_CREDENTIAL_LIMIT, VAULT_ID_MIN_LENGTH, VAULT_LIMIT, VAULT_NAME_MAX_LENGTH, VAULT_NAME_MIN_LENGTH } from "./general"
 
 interface ResponseError {
     status: number,
@@ -197,3 +197,27 @@ export const CREDENTIAL_DATA_PARSE_ERROR: ResponseError = {
     msg: "The credential data could not be parsed. Please ensure it is valid JSON format.",
     code: "ERR_CREDENTIAL_DATA_PARSE_ERROR"
 };
+
+export const CREDENTIAL_ID_INVALID_LENGTH: ResponseError = {
+    status: 400,
+    msg: `Invalid credential ID: The ID must be exactly ${CREDENTIAL_ID_MIN_LENGTH} characters long.`,
+    code: "CREDENTIAL_ID_INVALID_LENGTH"
+}
+
+export const CREDENTIAL_NOT_SELECTED: ResponseError = {
+    status: 400,
+    msg: "No credential selected: Please select a credential to proceed.",
+    code: "CREDENTIAL_NOT_SELECTED"
+}
+
+export const CREDENTIAL_NOT_FOUND: ResponseError = {
+    status: 404,
+    msg: "Credential not found: The requested credential does not exist.",
+    code: "CREDENTIAL_NOT_FOUND"
+}
+
+export const INVALID_CREDENTIAL_ACTION: ResponseError = {
+    status: 400,
+    msg: "Invalid credential action: The action requested cannot be performed on this credential.",
+    code: "INVALID_CREDENTIAL_ACTION"
+}

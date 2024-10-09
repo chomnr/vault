@@ -44,6 +44,17 @@ export default function Home() {
 
     fetchCredentials();
   }, []);
+
+  const handleCredentialLink = async (id: string, action: string) => {
+    const response = await fetch('/api/credentials/link', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, action }),
+    });
+    if (response.redirected) window.location.href = response.url;
+  };
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -70,8 +81,8 @@ export default function Home() {
                       <div className="name">{credential.name}</div>
                     </div>
                     <div className="actions">
-                      <a href={`/vault/credential/edit/${credential.id}`}><Edit size={8} /></a>
-                      <a href={`/vault/credential/delete/${credential.id}`}><Trashcan size={8} /></a>
+                      <a onClick={() => handleCredentialLink(credential.id, "edit")}><Edit size={8} /></a>
+                      <a onClick={() => handleCredentialLink(credential.id, "delete")}><Trashcan size={8} /></a>
                     </div>
                   </div>
                 ))}
