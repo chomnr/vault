@@ -5,8 +5,6 @@ import { COOKIE_MAX_AGE, HOST_URL } from './general'
 import { newSession, SESSION_OPTIONS, SessionData } from './session';
 import { getIronSession } from 'iron-session';
 import { cookies, headers } from 'next/headers';
-import { VAULT_DECRYPTION_EMPTY_KEY } from './response';
-import { request } from 'http';
 
 export async function isAuthenticated() {
     const session = await getIronSession<SessionData>(cookies(), SESSION_OPTIONS)
