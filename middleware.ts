@@ -22,8 +22,14 @@ export async function middleware(request: NextRequest) {
             return NextResponse.redirect(new URL('/', request.url))
         }
 
+        if (request.nextUrl.pathname === "/vault" && session.credential !== undefined) {
+            session.credential = undefined
+            await session.save()
+        }
+
         if (request.nextUrl.pathname === "/" && session.vault !== undefined) {
             session.vault = undefined
+            session.credential = undefined
             await session.save()
         }
 
@@ -33,6 +39,14 @@ export async function middleware(request: NextRequest) {
 
         if (request.nextUrl.pathname === "/vault/delete" && session.vault?.key === undefined) {
             return NextResponse.redirect(new URL('/', request.url))
+        }
+
+        if (request.nextUrl.pathname === "/vault/credential/edit" && session.credential === undefined) {
+            return NextResponse.redirect(new URL('/vault', request.url))
+        }
+
+        if (request.nextUrl.pathname === "/vault/credential/delete" && session.credential === undefined) {
+            return NextResponse.redirect(new URL('/vault', request.url))
         }
     }
     return result
