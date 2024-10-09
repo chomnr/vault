@@ -1,7 +1,8 @@
-import { CREDENTIAL_DATA_EMPTY, CREDENTIAL_DATA_PARSE_ERROR, CREDENTIAL_NAME_EMPTY, CREDENTIAL_TYPE_EMPTY, LOGIN_REQUIRED, VAULT_FAILED_TO_RETRIEVE, VAULT_NOT_DECRYPTED } from "@/config/response";
+import { CREDENTIAL_DATA_EMPTY, CREDENTIAL_DATA_PARSE_ERROR, CREDENTIAL_NAME_EMPTY, CREDENTIAL_TYPE_EMPTY, LOGIN_REQUIRED, VAULT_FAILED_TO_RETRIEVE, VAULT_NOT_DECRYPTED, VAULT_NOT_FOUND } from "@/config/response";
 import { SessionData, SESSION_OPTIONS } from "@/config/session";
 import { err_route } from "@/config/shorthand";
 import { PrismaClient } from "@prisma/client";
+import { connect } from "http2";
 import { getIronSession } from "iron-session";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
@@ -48,20 +49,14 @@ export async function POST(request: Request) {
         cipher.finish();
         const encryptedData = forge.util.encode64(cipher.output.getBytes());
         const base64IV = forge.util.encode64(iv);
-        const credentials = await prisma.vault.update({
-            where: {
-                id: session.vault.id
-            },
+        const credentials = await prisma.credential.create({
             data: {
-                credentials: {
-                    push: {
-                        type: type,
-                        name: name,
-                        data: encryptedData,
-                        iv: base64IV,
-                        updatedAt: new Date().toISOString()
-                    }
-                }
+                type: type as string,
+                name: name as string,
+                data: encryptedData,
+                iv: base64IV,
+                updatedAt: new Date().toISOString(),
+                vaultId: session.vault.id!,
             }
         });
         return NextResponse.json(credentials);
@@ -86,12 +81,14 @@ export async function GET() {
             VAULT_NOT_DECRYPTED.code)
     const prisma = new PrismaClient();
     try {
-        const credentials = await prisma.vault.findMany({
+        const credentials = await prisma.credential.findMany({
             where: {
-                id: session.vault.id
+                vaultId: session.vault.id,
             },
             select: {
-                credentials: true
+                id: true,
+                type: true,
+                name: true
             }
         });
         return NextResponse.json(credentials);
