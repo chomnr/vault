@@ -1,26 +1,15 @@
 'use client'
 
-import { useEffect, useRef, useState } from "react";
+import React, { useState, useEffect } from 'react';
 import styles from "../page.module.css";
-import { decryptVault } from "@/config/actions";
-import { useFormState } from "react-dom";
-import { Alert } from "@/components/alert";
-import React from "react";
-import { Input } from "@/components/input";
-import { Edit, Locked, Trashcan } from "@/components/icons";
-
-const initialState = {
-  result: {
-    error: null,
-    code: null,
-    timestamp: null,
-    data: null
-  },
-};
+import { Input } from '@/components/input';
+import { Trashcan, Edit } from '@/components/icons';
 
 export default function Home() {
-  const [credentials, setCredentials] = useState<{ id: string, type: string, name: string }[] | null>(null);
+  const [credentials, setCredentials] = useState<{ id: string; type: string; name: string }[] | null>(null);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+
   useEffect(() => {
     const fetchCredentials = async () => {
       try {
@@ -55,6 +44,13 @@ export default function Home() {
     if (response.redirected) window.location.href = response.url;
   };
 
+  const filteredCredentials = credentials
+    ? credentials.filter((credential) =>
+        credential.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        credential.type.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : [];
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -72,10 +68,15 @@ export default function Home() {
                 <p>The vault is now decrypted, and you can access your stored credentials. However, each one is still encrypted individually. You'll need to decrypt them manually. You must search by the credential's type in order to locate your desired credential.</p>
                 <p>If you would like to decrypt a credential just click on it. You can create a credential <a style={{ color: 'lightblue' }} href="/vault/credential/create">here</a>.</p>
               </div>
-              <Input type="search" placeholder="Search for credentials" />
+              <Input
+                type="search"
+                placeholder="Search for credentials"
+                value={searchTerm}
+                onchange={(e: { target: { value: React.SetStateAction<string>; }; }) => setSearchTerm(e.target.value)}
+              />
               <div className="credentials">
-                {credentials && credentials.map((credential) => (
-                  <div id={credential.id} className="credential">
+                {filteredCredentials.map((credential) => (
+                  <div key={credential.id} id={credential.id} className="credential">
                     <div className="info">
                       <div className="type">{credential.type.toUpperCase()}</div>
                       <div className="name">{credential.name}</div>
