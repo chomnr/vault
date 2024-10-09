@@ -105,7 +105,6 @@ export default function Home() {
                       </div>
 
                       <div className="actions">
-                        <a onClick={() => handleCredentialLink(credential.id, "edit")}><Edit size={8} /></a>
                         <a onClick={() => handleCredentialLink(credential.id, "delete")}><Trashcan size={8} /></a>
                       </div>
                     </div>
