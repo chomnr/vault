@@ -1,10 +1,9 @@
 'use client'
 
-import { Input } from "@/components/input";
 import styles from "../../../page.module.css";
 import React, { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
-import { deleteVault } from "@/config/actions";
+import { deleteCredential } from "@/config/actions";
 import { Alert } from "@/components/alert";
 
 const initialState = {
@@ -17,25 +16,25 @@ const initialState = {
 };
 
 export default function Home() {
-    const [vault, setVault] = useState<{ id: string; name: string } | null>(null);
-    const [state, formAction] = useFormState(deleteVault, initialState);
+    const [credential, setCredential] = useState<{ id: string; name: string } | null>(null);
+    const [state, formAction] = useFormState(deleteCredential, initialState);
     const [loading, setLoading] = useState(true);
-    const [vaultName, setVaultName] = useState('');
+    const [credentialName, setCredentialName] = useState('');
 
     const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
-        if (vaultName.trim() === '') {
-            alert("Please enter the vault name to confirm deletion.");
+        if (credentialName.trim() === '') {
+            alert("Please enter the credential name to confirm deletion.");
             return;
         }
         const formData = new FormData();
-        formData.append("confirmation", vaultName);
+        formData.append("confirmation", credentialName);
         formAction(formData);
     };
 
     useEffect(() => {
         const fetchVaultDetails = async () => {
             try {
-                const response = await fetch('/api/vaults/info', {
+                const response = await fetch('/api/credentials/info', {
                     method: 'POST',
                     credentials: 'include',
                     headers: {
@@ -44,7 +43,7 @@ export default function Home() {
                 });
                 if (response.ok) {
                     const data = await response.json();
-                    setVault(data);
+                    setCredential(data);
                 }
             } catch (err) {
                 console.log(err);
@@ -72,12 +71,12 @@ export default function Home() {
                         <form className="flex-box row" action={formAction}>
                             <div className="flex-box col" style={{ gap: '7px' }}>
                                 <p>Are you sure you want to delete this credential? Once deleted, this credential will be permanently removed and cannot be recovered. This action cannot be undone.</p>
-                                <h2>Please type <span style={{color: "#1976D2"}}>credential name</span> to confirm.</h2>
+                                <h2>Please type <span style={{color: "#1976D2"}}>{credential?.name}</span> to confirm.</h2>
                                 <input
                                     placeholder="Credential Name"
                                     type="text"
-                                    value={vaultName}
-                                    onChange={(e) => setVaultName(e.target.value)}
+                                    value={credentialName}
+                                    onChange={(e) => setCredentialName(e.target.value)}
                                 />
                             </div>
                         </form>

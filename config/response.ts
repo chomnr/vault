@@ -221,3 +221,14 @@ export const INVALID_CREDENTIAL_ACTION: ResponseError = {
     msg: "Invalid credential action: The action requested cannot be performed on this credential.",
     code: "INVALID_CREDENTIAL_ACTION"
 }
+
+
+
+/* =======================================
+   UNIVERSAL ERROR
+   ======================================= */
+export const INVALID_DELETION_CONFIRMATION: ResponseError = {
+    status: 400,
+    msg: "Invalid deletion confirmation: The name provided does not match the required confirmation.",
+    code: "INVALID_DELETION_CONFIRMATION"
+}

@@ -1,4 +1,4 @@
-import { LOGIN_REQUIRED, VAULT_NAME_INVALID, VAULT_NOT_DECRYPTED, VAULT_NOT_FOUND, VAULT_NOT_SELECTED_OR_DECRYPTED, VAULT_NOT_SELECTED_OR_NOT_DECRYPTED } from "@/config/response";
+import { INVALID_DELETION_CONFIRMATION, LOGIN_REQUIRED, VAULT_NAME_INVALID, VAULT_NOT_DECRYPTED, VAULT_NOT_FOUND, VAULT_NOT_SELECTED_OR_DECRYPTED, VAULT_NOT_SELECTED_OR_NOT_DECRYPTED } from "@/config/response";
 import { SessionData, SESSION_OPTIONS } from "@/config/session";
 import { err_route } from "@/config/shorthand";
 import { PrismaClient } from "@prisma/client";
@@ -27,9 +27,9 @@ export async function POST(request: Request, response: Response) {
             )
         }
         if (confirmation !== session.vault.name) {
-            return err_route(VAULT_NAME_INVALID.status,
-                VAULT_NAME_INVALID.msg,
-                VAULT_NAME_INVALID.code
+            return err_route(INVALID_DELETION_CONFIRMATION.status,
+                INVALID_DELETION_CONFIRMATION.msg,
+                INVALID_DELETION_CONFIRMATION.code
             )
         }
         await prisma.vault.delete({
