@@ -49,7 +49,7 @@ export default function Home() {
 
   const handleCredentialLink = async (id: string, action: string) => {
     try {
-      const response = await fetch('/api/credentials/link', {
+      await fetch('/api/credentials/link', {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

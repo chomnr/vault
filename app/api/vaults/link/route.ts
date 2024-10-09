@@ -35,7 +35,7 @@ export async function POST(request: Request) {
                 key: undefined
             }
         await session.save()
-        return NextResponse.redirect(new URL("/vault/decrypt", request.url), 303)
+        return new NextResponse(null, {status: 200})
         } else {
             return err_route(VAULT_NOT_FOUND.status,
                 VAULT_NOT_FOUND.msg,

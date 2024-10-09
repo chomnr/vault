@@ -31,7 +31,7 @@ export default function Home() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id }),
     });
-    if (response.redirected) window.location.href = response.url;
+    window.location.href = "/vault/decrypt"
   };
 
   useEffect(() => {
