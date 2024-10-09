@@ -10,7 +10,7 @@ import 'highlight.js/styles/monokai.css';
 export default function Home() {
   const [credentials, setCredentials] = useState<{ id: string; type: string; name: string; data: string }[] | null>(null);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');  
+  const [searchTerm, setSearchTerm] = useState('');
   const [visibleCredentials, setVisibleCredentials] = useState<{ [key: string]: boolean }>({});
 
   useEffect(() => {
@@ -48,13 +48,17 @@ export default function Home() {
   }, [visibleCredentials, credentials]);
 
   const handleCredentialLink = async (id: string, action: string) => {
-    const response = await fetch('/api/credentials/link', {
-      method: 'POST',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id, action }),
-    });
-    if (response.redirected) window.location.href = response.url;
+    try {
+      const response = await fetch('/api/credentials/link', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, action }),
+      });
+      window.location.href = "/vault/credential/" + action;
+    } catch (err) {
+      console.error("Error handling credential link:", err);
+    }
   };
 
   const filteredCredentials = credentials

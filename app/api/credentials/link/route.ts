@@ -44,10 +44,14 @@ export async function POST(request: Request) {
             }
             await session.save()
             if (action === "edit") {
-                return NextResponse.redirect(new URL("/vault/credential/edit", request.url), 303)
+                return NextResponse.json(null, {
+                    status: 200
+                });
             }
             if (action === "delete") {
-                return NextResponse.redirect(new URL("/vault/credential/delete", request.url), 303)
+                return NextResponse.json(null, {
+                    status: 200
+                });
             }
         } else {
             session.credential = undefined
