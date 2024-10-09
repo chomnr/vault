@@ -99,7 +99,8 @@ export async function GET() {
     if (session.vault?.key === undefined)
         return err_route(VAULT_NOT_DECRYPTED.status,
             VAULT_NOT_DECRYPTED.msg,
-            VAULT_NOT_DECRYPTED.code)
+            VAULT_NOT_DECRYPTED.code);
+    
     const prisma = new PrismaClient();
     try {
         const credentials = await prisma.credential.findMany({
@@ -109,11 +110,31 @@ export async function GET() {
             select: {
                 id: true,
                 type: true,
-                name: true
+                name: true,
+                data: true,
+                iv: true 
             }
         });
-        return NextResponse.json(credentials);
+        const aesKey = session.vault.key;
+        const decryptedCredentials = credentials.map(credential => {
+            const { data: encryptedData, iv: base64IV } = credential;
+            const iv = forge.util.decode64(base64IV);
+            const decipher = forge.cipher.createDecipher('AES-CBC', forge.util.hexToBytes(aesKey));
+            decipher.start({ iv: iv });
+            decipher.update(forge.util.createBuffer(forge.util.decode64(encryptedData)));
+            decipher.finish();
+            const decryptedData = decipher.output.toString();
+            return {
+                id: credential.id,
+                type: credential.type,
+                name: credential.name,
+                data: JSON.parse(decryptedData) 
+            };
+        });
+
+        return NextResponse.json(decryptedCredentials);
     } catch (error) {
+        console.log(error);
         return err_route(VAULT_FAILED_TO_RETRIEVE.status,
             VAULT_FAILED_TO_RETRIEVE.msg,
             VAULT_FAILED_TO_RETRIEVE.code);
@@ -121,3 +142,4 @@ export async function GET() {
         await prisma.$disconnect();
     }
 }
+
