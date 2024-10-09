@@ -90,7 +90,7 @@ export default function Home() {
             <div className="flex-box col" style={{ gap: '7px' }}>
               <div className="flex-box col" style={{ gap: '7px' }}>
                 <br />
-                <p>The vault is now decrypted, and you can access your stored credentials. <br></br><br></br>You can create a credential <a style={{ color: 'lightblue' }} href="/vault/credential/create">here</a>.</p>
+                <p>The vault is now decrypted, and you can access your stored credentials. This project is open source @ <a style={{ color: 'lightblue' }} href='https://github.com/chomnr/vault'>https://github.com/chomnr/vault</a> <br></br><br></br>You can create a credential <a style={{ color: 'lightblue' }} href="/vault/credential/create">here</a>.</p>
               </div>
               <Input
                 type="search"
