@@ -1,14 +1,17 @@
-'use client'
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import styles from "../page.module.css";
 import { Input } from '@/components/input';
 import { Trashcan, Edit } from '@/components/icons';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/monokai.css';
 
 export default function Home() {
-  const [credentials, setCredentials] = useState<{ id: string; type: string; name: string }[] | null>(null);
+  const [credentials, setCredentials] = useState<{ id: string; type: string; name: string; data: string }[] | null>(null);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');  
+  const [visibleCredentials, setVisibleCredentials] = useState<{ [key: string]: boolean }>({});
 
   useEffect(() => {
     const fetchCredentials = async () => {
@@ -34,6 +37,16 @@ export default function Home() {
     fetchCredentials();
   }, []);
 
+  useEffect(() => {
+    // Highlight the JSON code when it becomes visible
+    if (credentials) {
+      const highlightedElements = document.querySelectorAll('pre code');
+      highlightedElements.forEach((block) => {
+        hljs.highlightElement(block);
+      });
+    }
+  }, [visibleCredentials, credentials]);
+
   const handleCredentialLink = async (id: string, action: string) => {
     const response = await fetch('/api/credentials/link', {
       method: 'POST',
@@ -46,10 +59,18 @@ export default function Home() {
 
   const filteredCredentials = credentials
     ? credentials.filter((credential) =>
-        credential.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        credential.type.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+      credential.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      credential.type.toLowerCase().includes(searchTerm.toLowerCase())
+    )
     : [];
+
+  // Toggle visibility of the content for a specific credential
+  const toggleVisibility = (id: string) => {
+    setVisibleCredentials((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
 
   return (
     <div className={styles.page}>
@@ -76,14 +97,26 @@ export default function Home() {
               />
               <div className="credentials">
                 {filteredCredentials.map((credential) => (
-                  <div key={credential.id} id={credential.id} className="credential">
-                    <div className="info">
-                      <div className="type">{credential.type.toUpperCase()}</div>
-                      <div className="name">{credential.name}</div>
+                  <div key={credential.id} className='flex col'>
+                    <div id={credential.id} onClick={() => toggleVisibility(credential.id)} className="credential">
+                      <div className="info" style={{ cursor: 'pointer' }}>
+                        <div className="type">{credential.type.toUpperCase()}</div>
+                        <div className="name">{credential.name}</div>
+                      </div>
+
+                      <div className="actions">
+                        <a onClick={() => handleCredentialLink(credential.id, "edit")}><Edit size={8} /></a>
+                        <a onClick={() => handleCredentialLink(credential.id, "delete")}><Trashcan size={8} /></a>
+                      </div>
                     </div>
-                    <div className="actions">
-                      <a onClick={() => handleCredentialLink(credential.id, "edit")}><Edit size={8} /></a>
-                      <a onClick={() => handleCredentialLink(credential.id, "delete")}><Trashcan size={8} /></a>
+                    <div className='content'>
+                      {visibleCredentials[credential.id] && (
+                        <pre>
+                          <code className="language-json">
+                            {credential.data}
+                          </code>
+                        </pre>
+                      )}
                     </div>
                   </div>
                 ))}
