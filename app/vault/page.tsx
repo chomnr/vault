@@ -90,8 +90,7 @@ export default function Home() {
             <div className="flex-box col" style={{ gap: '7px' }}>
               <div className="flex-box col" style={{ gap: '7px' }}>
                 <br />
-                <p>The vault is now decrypted, and you can access your stored credentials. However, each one is still encrypted individually. You'll need to decrypt them manually. You must search by the credential's type in order to locate your desired credential.</p>
-                <p>If you would like to decrypt a credential just click on it. You can create a credential <a style={{ color: 'lightblue' }} href="/vault/credential/create">here</a>.</p>
+                <p>The vault is now decrypted, and you can access your stored credentials. <br></br><br></br>You can create a credential <a style={{ color: 'lightblue' }} href="/vault/credential/create">here</a>.</p>
               </div>
               <Input
                 type="search"
