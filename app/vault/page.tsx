@@ -19,14 +19,13 @@ const initialState = {
 };
 
 export default function Home() {
-  const [vault, setVault] = useState<{ id: string; name: string } | null>(null);
+  const [credentials, setCredentials] = useState<{ id: string, type: string, name: string }[] | null>(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
-    const fetchVaultDetails = async () => {
+    const fetchCredentials = async () => {
       try {
-        const response = await fetch('/api/vaults/info', {
-          method: 'POST',
+        const response = await fetch('/api/credentials', {
+          method: 'GET',
           credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
@@ -34,7 +33,7 @@ export default function Home() {
         });
         if (response.ok) {
           const data = await response.json();
-          setVault(data);
+          setCredentials(data);
         }
       } catch (err) {
         console.log(err);
@@ -42,7 +41,8 @@ export default function Home() {
         setLoading(false);
       }
     };
-    fetchVaultDetails();
+
+    fetchCredentials();
   }, []);
   return (
     <div className={styles.page}>
@@ -59,29 +59,22 @@ export default function Home() {
               <div className="flex-box col" style={{ gap: '7px' }}>
                 <br />
                 <p>The vault is now decrypted, and you can access your stored credentials. However, each one is still encrypted individually. You'll need to decrypt them manually. You must search by the credential's type in order to locate your desired credential.</p>
-                <p>If you would like to decrypt a credential just click on it. You can create a credential <a style={{color: 'lightblue'}} href="/vault/credential/create">here</a>.</p>
+                <p>If you would like to decrypt a credential just click on it. You can create a credential <a style={{ color: 'lightblue' }} href="/vault/credential/create">here</a>.</p>
               </div>
               <Input type="search" placeholder="Search for credentials" />
               <div className="credentials">
-                <div className="credential">
-                  <div className="info">
-                    <div className="type">DISCORD</div>
-                    <div className="name">discord info for account main acc</div>
+                {credentials && credentials.map((credential) => (
+                  <div id={credential.id} className="credential">
+                    <div className="info">
+                      <div className="type">{credential.type.toUpperCase()}</div>
+                      <div className="name">{credential.name}</div>
+                    </div>
+                    <div className="actions">
+                      <a href={`/vault/credential/edit/${credential.id}`}><Edit size={8} /></a>
+                      <a href={`/vault/credential/delete/${credential.id}`}><Trashcan size={8} /></a>
+                    </div>
                   </div>
-                  <div className="actions">
-                    <a href="/vault/credential/edit"><Edit size={8} /></a>
-                    <a href="/vault/credential/delete"><Trashcan size={8} /></a>
-                  </div>
-                </div>
-                <div className="credential">
-                  <div className="info">
-                    GOOGLE
-                  </div>
-                  <div className="actions">
-                    <a href="/vault/edit"><Edit size={8} /></a>
-                    <a href="/vault/delete"><Trashcan size={8}/></a>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
