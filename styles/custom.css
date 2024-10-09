@@ -456,6 +456,13 @@ form.key-upload .submit:hover {
     padding: 3px;
 }
 
+@media (max-width: 600px) {
+    .vault.unlocked {
+        max-width: 348px;
+    }
+}
+
+
 /* =======================================
    Credential Creation
    =======================================  */
