@@ -80,7 +80,7 @@ export default function Home() {
             ) : (
               null
             )}
-            <div id="vault_add" className="vault" onClick={() => window.location.href = "/vault/create"}>
+            <div className="vault" onClick={() => window.location.href = "/vault/create"}>
               <div className="inner">
                 <div className="icon">+</div>
               </div>
