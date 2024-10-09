@@ -32,6 +32,11 @@ export async function POST(request: Request, response: Response) {
                 INVALID_DELETION_CONFIRMATION.code
             )
         }
+        await prisma.credential.deleteMany({
+            where: {
+                vaultId: session.vault.id
+            }
+        });
         await prisma.vault.delete({
             where: {
                 id: session.vault.id
@@ -47,3 +52,8 @@ export async function POST(request: Request, response: Response) {
             VAULT_NOT_FOUND.code)
     }
 }
+
+/**
+ * 
+ * 
+ */
