@@ -170,6 +170,11 @@ export const VAULT_NOT_DECRYPTED: ResponseError = {
     code: "ERR_VAULT_NOT_DECRYPTED"
 };
 
+export const VAULT_CAPACITY_REACHED: ResponseError = {
+    status: 400,
+    msg: "Vault capacity reached: You cannot add more credentials as the maximum capacity has been reached.",
+    code: "ERR_VAULT_CAPACITY_REACHED"
+};
 
 /* =======================================
    CREDENTIAL ERROR

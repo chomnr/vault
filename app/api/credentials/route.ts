@@ -1,4 +1,4 @@
-import { CREDENTIAL_DATA_EMPTY, CREDENTIAL_DATA_PARSE_ERROR, CREDENTIAL_NAME_EMPTY, CREDENTIAL_TYPE_EMPTY, LOGIN_REQUIRED, VAULT_FAILED_TO_RETRIEVE, VAULT_NOT_DECRYPTED, VAULT_NOT_FOUND } from "@/config/response";
+import { CREDENTIAL_DATA_EMPTY, CREDENTIAL_DATA_PARSE_ERROR, CREDENTIAL_NAME_EMPTY, CREDENTIAL_TYPE_EMPTY, LOGIN_REQUIRED, VAULT_CAPACITY_REACHED, VAULT_FAILED_TO_RETRIEVE, VAULT_NOT_DECRYPTED, VAULT_NOT_FOUND } from "@/config/response";
 import { SessionData, SESSION_OPTIONS } from "@/config/session";
 import { err_route } from "@/config/shorthand";
 import { PrismaClient } from "@prisma/client";
@@ -40,6 +40,27 @@ export async function POST(request: Request) {
             return err_route(CREDENTIAL_DATA_PARSE_ERROR.status,
                 CREDENTIAL_DATA_PARSE_ERROR.msg,
                 CREDENTIAL_DATA_PARSE_ERROR.code)
+        }
+        const vault = await prisma.vault.findUnique({
+            where: {
+                id: session.vault.id
+            }
+        })
+        if (vault) {
+            const totalCredentials = await prisma.credential.count({
+                where: {
+                    vaultId: session.vault.id,
+                },
+            });
+            if (vault.maxCredentials === totalCredentials) {
+                return err_route(VAULT_CAPACITY_REACHED.status,
+                    VAULT_CAPACITY_REACHED.msg,
+                    VAULT_CAPACITY_REACHED.code)
+            }
+        } else {
+            return err_route(VAULT_NOT_FOUND.status,
+                VAULT_NOT_FOUND.msg,
+                VAULT_NOT_FOUND.code)
         }
         const aesKey = session.vault.key;
         const iv = forge.random.getBytesSync(16);
