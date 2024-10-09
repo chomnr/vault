@@ -34,7 +34,9 @@ export async function POST(request: Request) {
     try {
         const vaults = await prisma.vault.findMany();
         if (vaults.length > VAULT_LIMIT)
-            return err_route(VAULT_LIMIT_EXCEEDED.status, VAULT_LIMIT_EXCEEDED.msg, VAULT_LIMIT_EXCEEDED.code);
+            return err_route(VAULT_LIMIT_EXCEEDED.status,
+                VAULT_LIMIT_EXCEEDED.msg,
+                VAULT_LIMIT_EXCEEDED.code);
         const formData = await request.formData();
         const name = formData.get('name') as string;
         const maxCredentials = parseInt(formData.get('maxCredentials') as string);
@@ -117,7 +119,9 @@ export async function POST(request: Request) {
         }
     } catch (er) {
         console.log(er);
-        return err_route(VAULT_FIELDS_REQUIRED.status, VAULT_FIELDS_REQUIRED.msg, VAULT_FIELDS_REQUIRED.code);
+        return err_route(VAULT_FIELDS_REQUIRED.status,
+            VAULT_FIELDS_REQUIRED.msg,
+            VAULT_FIELDS_REQUIRED.code);
     }
 }
 export async function GET() {
@@ -135,7 +139,9 @@ export async function GET() {
         });
         return NextResponse.json(vaults);
     } catch (error) {
-        return err_route(VAULT_FAILED_TO_RETRIEVE.status, VAULT_FAILED_TO_RETRIEVE.msg, VAULT_FAILED_TO_RETRIEVE.code);
+        return err_route(VAULT_FAILED_TO_RETRIEVE.status,
+            VAULT_FAILED_TO_RETRIEVE.msg,
+            VAULT_FAILED_TO_RETRIEVE.code);
     } finally {
         await prisma.$disconnect();
     }
