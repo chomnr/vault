@@ -1,6 +1,6 @@
 # Vault
 > Vault  JSON-based Password Manager - Secure and Flexible
-[<img alt="Encryption" src="https://img.shields.io/badge/%20Encryption%2FAES256-orange" height="20">](AES 256)
+[<img alt="encryption" src="https://img.shields.io/badge/%20Encryption-AES%20256-orange" height="20">](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
 
 
 A password manager project built with <b>Next.js</b>, <b>MongoDB</b>, <b>Prisma ORM</b>, and <b>TypeScript</b>. You can only have one user but multiple vaults, each vault having its own key (AES 256). Instead of being stored as plain text, all values associated with each individual credential are stored as JSON.
