@@ -1,4 +1,6 @@
 # Vault
+> V A U L T  JSON-based Password Manager - Secure and Flexible
+
 A password manager project built with <b>Next.js</b>, <b>MongoDB</b>, <b>Prisma ORM</b>, and <b>TypeScript</b>. You can only have one user but multiple vaults, each vault having its own key (AES 256). Instead of being stored as plain text, all values associated with each individual credential are stored as JSON.
 <div align="center"> <img src="./docs/img/main_2.png"> </div>
 
