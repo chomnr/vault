@@ -4,3 +4,21 @@
 
 ## Installation
 First, [download](https://nodejs.org/en/download/package-manager/) and install <b>Node.js</b>
+```sh
+# Clone Repository
+git clone https://github.com/chomnr/vault.git
+cd vault
+
+# Install Dependencies
+npm install
+
+# Set Up Environment Variables
+cp .env.example .env # fill everything out.
+
+# Push the schema onto Mongodb database
+npx prisma db push
+
+# Run 
+npm run build
+npm start   
+```
