@@ -3,5 +3,4 @@
 <div align="center"> <img src="./docs/img/main_2.png"> </div>
 
 ## Installation
-This installation is for <code>brute-http</code> this is the http server that needs to run in order
-to collect the traffic from the dummy servers.
+First, [Download](https://nodejs.org/en/download/package-manager/) and install <b>Node.js</b>
