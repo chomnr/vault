@@ -24,7 +24,8 @@ export const SESSION_OPTIONS: SessionOptions = {
     cookieName: COOKIE_NAME,
     cookieOptions: {
         secure: NODE_ENV === "production",
-        maxAge: COOKIE_MAX_AGE(true)
+        maxAge: COOKIE_MAX_AGE(true),
+        httpOnly: true
     },
 };
 
