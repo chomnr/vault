@@ -26,3 +26,6 @@ npx prisma db push
 npm run build
 npm start   
 ```
+
+## Preview
+You can preview the application [here](https://vault.pointless.ai/). Username and password is <b>admin</b>.
