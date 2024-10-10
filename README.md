@@ -3,4 +3,4 @@
 <div align="center"> <img src="./docs/img/main_2.png"> </div>
 
 ## Installation
-First, [Download](https://nodejs.org/en/download/package-manager/) and install <b>Node.js</b>
+First, [download](https://nodejs.org/en/download/package-manager/) and install <b>Node.js</b>
