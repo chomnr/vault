@@ -1,5 +1,6 @@
 # Vault
 > Vault  JSON-based Password Manager - Secure and Flexible
+
 [<img alt="encryption" src="https://img.shields.io/badge/%20Encryption-AES%20256-orange" height="20">](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
 
 
