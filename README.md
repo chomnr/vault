@@ -7,7 +7,7 @@
 * [Node 18](https://nodejs.org/download/release/latest-v18.x/)
 
 ## Installation
-First, [download](https://nodejs.org/en/download/package-manager/) and install <b>Node.js</b>
+Necessary instructions in order to get Vault up and running.
 ```sh
 # Clone Repository
 git clone https://github.com/chomnr/vault.git
