@@ -17,8 +17,10 @@ ENV VAULT_CREDENTIAL_LIMIT=100
 ENV COOKIE_SECRET="your secret goes here"
 ENV MONGODB_URI="mongodb://username:password@ip:port/database?authSource=admin&directConnection=true"
 ENV URL="http://localhost:3000"
-ENV NODE_ENV=development
+ENV NODE_ENV=production
 
 RUN npm run build
+
+RUN npx prisma db push
 
 CMD ["npm", "start"]
