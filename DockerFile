@@ -1,0 +1,24 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+ENV ADMIN_USERNAME=admin
+ENV ADMIN_PASSWORD=admin
+ENV VAULT_LIMIT=5
+ENV VAULT_CREDENTIAL_LIMIT=100
+ENV COOKIE_SECRET="your secret goes here"
+ENV MONGODB_URI="mongodb://username:password@ip:port/database?authSource=admin&directConnection=true"
+ENV URL="http://localhost:3000"
+ENV NODE_ENV=development
+
+RUN npm run build
+
+CMD ["npm", "start"]
