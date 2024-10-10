@@ -7,7 +7,7 @@ interface AuthenticatedProps {
 }
 
 export const Authenticated: React.FC<AuthenticatedProps> = async ({ children }) => {
-    let isLoggedIn = await isAuthenticated();
+    const isLoggedIn = await isAuthenticated();
     if (!isLoggedIn) {
         return null
     }

@@ -22,7 +22,7 @@ export async function POST(request: Request, response: Response) {
             CREDENTIAL_NOT_SELECTED.code)
     const prisma = new PrismaClient();
     try {
-        let credential = await prisma.credential.findUnique({
+        const credential = await prisma.credential.findUnique({
             where: {
                 id: session.credential.id,
                 vaultId: session.vault.id

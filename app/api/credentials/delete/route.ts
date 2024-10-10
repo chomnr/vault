@@ -24,7 +24,7 @@ export async function POST(request: Request, response: Response) {
     try {
         const data = await request.json()
         const { confirmation } = data
-        let credential = await prisma.credential.findUnique({
+        const credential = await prisma.credential.findUnique({
             where: {
                 id: session.credential.id,
                 vaultId: session.vault.id

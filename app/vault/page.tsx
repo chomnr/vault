@@ -42,7 +42,7 @@ export default function Home() {
     if (credentials) {
       const highlightedElements = document.querySelectorAll('pre code');
       highlightedElements.forEach((block) => {
-        hljs.highlightElement(block);
+        hljs.highlightElement(block as HTMLElement);
       });
     }
   }, [visibleCredentials, credentials]);
